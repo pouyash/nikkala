@@ -1,6 +1,7 @@
 from django.contrib.auth.base_user import BaseUserManager, AbstractBaseUser
 from django.db import models
 
+
 class UserManager(BaseUserManager):
     def create_user(self, first_name, last_name, username, email, password=None):
         if not email:
@@ -9,10 +10,10 @@ class UserManager(BaseUserManager):
             raise ValueError("Please Enter username")
 
         user = self.model(
-            email = self.normalize_email(email),
+            email=self.normalize_email(email),
             username=username,
-            first_name = first_name,
-            last_name = last_name,
+            first_name=first_name,
+            last_name=last_name,
         )
         user.set_password(password)
         user.save(using=self._db)
@@ -20,11 +21,11 @@ class UserManager(BaseUserManager):
 
     def create_superuser(self, first_name, last_name, username, email, password=None):
         user = self.create_user(
-            email = self.normalize_email(email),
+            email=self.normalize_email(email),
             username=username,
             password=password,
-            first_name= first_name,
-            last_name= last_name,
+            first_name=first_name,
+            last_name=last_name,
         )
         user.is_admin = True
         user.is_staff = True
@@ -61,4 +62,3 @@ class User(AbstractBaseUser):
 
     def has_module_perms(self, app_label):
         return True
-

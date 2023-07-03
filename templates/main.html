@@ -1,0 +1,26 @@
+{% load static %}
+{% load render_partial %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    {% include 'utils/head.html' %}
+    <title>{% block title %} سایت فروشگاهی نیک کالا {% endblock %}</title>
+</head>
+<body>
+
+{% block ads %}
+{% endblock %}
+
+
+{% include 'utils/header.html' %}
+
+{% render_partial 'home.views.nav_component' %}
+
+{% block main %}
+
+{% endblock %}
+
+{% comment %}footer{% endcomment %}
+{% render_partial 'home.views.footer_component' %}
+</body>
+</html>
