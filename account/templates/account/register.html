@@ -1,0 +1,57 @@
+{% load static %}
+<html lang="fa" dir="rtl"><!--- https://t.me/sabzrea --->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.rtl.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/fontawesome/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <title> فروشگاه نیک کالا | ثبت نام </title>
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-10 col-md-7 col-lg-5 signup-login-box"><!-- start signup & login box -->
+            <img src="{% static 'assets/images/logo.png' %}">
+            <form method="post" action="">
+                {% csrf_token %}
+                {{ forms.as_div }}
+
+
+                <div class="signup-login-form">
+                    <div class="form-check text-center"><!-- start input check -->
+                        <input name="check" class="form-check-input form-check-input-custom" type="checkbox"
+                               id="customCheck" checked="">
+                        <label class="form-check-label line-height" for="customCheck">
+                            <a href="#" class="underline">حریم خصوصی</a> و <a href="#" class="underline">شرایط و
+                            قوانین</a> استفاده از سرویس های سایت نیک کالا را مطالعه نموده و با کلیه موارد آن موافقم.
+                        </label>
+                    </div><!-- end input check -->
+                </div>
+
+                <button type="submit" class="btn btn-danger d-block font-12 mx-auto signup-btn mb-4"><!-- signup btn -->
+                    ثبت نام
+                </button>
+
+                <p>قبلا در نیک کالا ثبت‌ نام کرده‌اید؟ <a href="{% url 'login' %}" class="underline">وارد شویــد</a></p>
+
+            </form>
+        </div><!-- end signup & login box -->
+    </div>
+</div>
+
+
+<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+<script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.6.5/sweetalert2.all.min.js"></script>
+
+{% load sweetify %}
+{% sweetify %}
+
+</body>
+</html>

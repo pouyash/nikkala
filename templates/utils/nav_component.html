@@ -59,7 +59,11 @@
             <li><a href="search.html">تخفیف‌ها و پیشنهادها</a></li>
             <li class="has-sub-menu"><a href="#">صفحات <i class="fa fa-angle-down"></i></a>
                 <ul class="sub-menu"><!-- start sub menu-->
-                    <li><a href="signup.html">ثبت نام / ورود</a></li>
+                    {% if request.user.is_authenticated %}
+                        <li><a href="">حساب کاربری</a></li>
+                    {% else %}
+                        <li><a href="{% url 'register' %}">ثبت نام / ورود</a></li>
+                    {% endif %}
                     <li class="has-sub-menu-level-2"><a href="#">محصولات</a><i class="fa fa-angle-down"></i>
                         <ul class="sub-menu-level-2"><!-- start sub menu level 2 -->
                             <li><a href="product.html">محصول موجود</a></li>

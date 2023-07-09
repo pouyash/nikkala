@@ -22,5 +22,14 @@
 
 {% comment %}footer{% endcomment %}
 {% render_partial 'home.views.footer_component' %}
+<script src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
+<script src="{% static 'filebrowser/js/AddFileBrowser.js' %}"></script>
+{#<script src="{% static 'filebrowser/js/AddFileBrowserVersion.js' %}"></script>#}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.6.5/sweetalert2.all.min.js"></script>
+
+{% load sweetify %}
+{% sweetify %}
+
 </body>
 </html>

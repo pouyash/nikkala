@@ -12,9 +12,23 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 from . import local_settings as ls
+from django.core.files.storage import FileSystemStorage, DefaultStorage
+from filebrowser.sites import site, FileBrowserSite
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
 
+# site = FileBrowserSite(name='filebrowser', storage=DefaultStorage())
+#
+# # My Custom FileBrowser site
+# custom_site = FileBrowserSite(name='custom_filebrowser', storage=DefaultStorage())
+# site.directory = "uploads/"
+# site.storage.location = "uploads/"
+#
+# site.storage = FileSystemStorage(location='/path/to/media/directory', base_url='/uploads/')
+
+site.directory = ""
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -40,11 +54,27 @@ INSTALLED_APPS = [
     # Internal App
     'user',
     'home',
+    'product',
+    'account',
 
     # External app
+
     'django_render_partial',
 
+    'grappelli',
+    'filebrowser',
+    'ckeditor',
+    'ckeditor_uploader',
+    'sweetify',
+
 ]
+
+SWEETIFY_SWEETALERT_LIBRARY = 'sweetalert2'
+
+EMAIL_HOST = 'sandbox.smtp.mailtrap.io'
+EMAIL_HOST_USER = ls.EMAIL_HOST_USER_LS
+EMAIL_HOST_PASSWORD = ls.EMAIL_PASS_USER_LS
+EMAIL_PORT = '2525'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -78,6 +108,25 @@ TEMPLATES = [
 WSGI_APPLICATION = 'nikkala.wsgi.application'
 
 
+FILEBROWSER_DIRECTORY = 'uploads/'
+FILEBROWSER_EXTENSIONS = {
+    'Folder': [''],
+    'Image': ['.jpg', '.jpeg', '.gif', '.png', '.tif', '.tiff'],
+    'Document': ['.pdf', '.doc', '.rtf', '.txt', '.xls', '.csv'],
+    'Video': ['.mov', '.wmv', '.mpeg', '.mpg', '.avi', '.rm'],
+    'Audio': ['.mp3', '.mp4', '.wav', '.aiff', '.midi', '.m4p']
+}
+
+
+FILEBROWSER_MAX_UPLOAD_SIZE = 10485760  # 10MB
+FILEBROWSER_OVERWRITE_EXISTING = True
+FILEBROWSER_CONVERT_FILENAME = False
+FILEBROWSER_ADMIN_VERSIONS = [
+    ('thumbnail', {'width': 60, 'height': 60}),
+    ('small', {'width': 140, 'height': 100}),
+    ('medium', {'width': 300, 'height': 200}),
+    ('big', {'width': 460, 'height': 360}),
+]
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
@@ -115,7 +164,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'fa-ir'
 
 TIME_ZONE = 'UTC'
 
@@ -128,10 +177,21 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+# STATIC_ROOT = BASE_DIR / 'static'
 STATICFILES_DIRS = [BASE_DIR/'static']
 
-MEDIA_URL = 'uploads/'
-MEDIA_ROOT = BASE_DIR / 'uploads'
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+FILEBROWSER_UPLOAD = True
+
+ADMIN_MEDIA_PREFIX = '/media/admin/'
+
+CKEDITOR_FILENAME_GENERATOR = 'utils.ck.get_filename'
+CKEDITOR_UPLOAD_PATH = os.path.join(BASE_DIR, MEDIA_ROOT, 'ckeditor_media')
+# CKEDITOR_IMAGE_BACKEND = "pillow"
+CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
