@@ -175,13 +175,13 @@
                         <div class="row">
                             {% for product in products %}
                                 <div class="col-lg-4 col-md-6"><!-- start item -->
-                                    <a href="product.html" class="d-block">
+                                    <a href="{% url 'product' slug=product.slug %}" class="d-block">
                                     </a>
-                                    <div class="card custom-card mt-3"><a href="product.html" class="d-block">
+                                    <div class="card custom-card mt-3"><a href="{% url 'product' slug=product.slug %}" class="d-block">
                                         <img src="{{ product.image.url }}" class="slider-pic">
                                     </a>
-                                        <div class="card-body"><a href="product.html" class="d-block">
-                                        </a><a href="product.html" class="product-title">
+                                        <div class="card-body"><a href="{% url 'product' slug=product.slug %}" class="d-block">
+                                        </a><a href="{% url 'product' slug=product.slug %}" class="product-title">
                                             {{ product.title }}
                                         </a>
                                             <div class="d-flex justify-content-between">
