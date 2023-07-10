@@ -1,5 +1,5 @@
 import sweetify
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from utils.functions import create_activation_code
@@ -79,6 +79,11 @@ class LoginView(View):
                 sweetify.error(request, 'لطفا حساب کاربریتان را فعال نمائید')
                 return render(request, 'account/login.html', context)
 
+
+def log_out(request):
+    logout(request)
+    sweetify.success(request, 'با موفقیت خارج شدید')
+    return redirect(reverse('home'))
 
 
 def activate_email(request, code):

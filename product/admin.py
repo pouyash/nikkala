@@ -7,7 +7,7 @@ from product.models import Product, Category, Brand
 
 @register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ['id', 'title', 'slug', 'is_active']
+    list_display = ['id', 'title', 'parent', 'slug', 'is_active']
     prepopulated_fields = {
         'slug': ('title',)
     }

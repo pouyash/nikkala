@@ -6,7 +6,7 @@
                     <li class="col-3 mega-menu-box">
                         <ul>
                             <li class="menu-title"><i class="fa fa-angle-left"></i>کالای دیجیتال</li>
-                            <li><a href="search.html">گوشی موبایل</a></li>
+                            <li><a href="{% url 'products' search='گوشی موبایل' %}">گوشی موبایل</a></li>
                             <li><a href="search.html">لوازم جانبی گوشی</a></li>
                             <li><a href="search.html">لپ تاپ</a></li>
                             <li><a href="search.html">لوازم جانبی لپ تاپ</a></li>
@@ -60,7 +60,7 @@
             <li class="has-sub-menu"><a href="#">صفحات <i class="fa fa-angle-down"></i></a>
                 <ul class="sub-menu"><!-- start sub menu-->
                     {% if request.user.is_authenticated %}
-                        <li><a href="">حساب کاربری</a></li>
+                        <li><a href="{% url 'logout' %}">خروج</a></li>
                     {% else %}
                         <li><a href="{% url 'register' %}">ثبت نام / ورود</a></li>
                     {% endif %}

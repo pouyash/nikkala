@@ -13,7 +13,8 @@ urlpatterns = [
     path('grappelli/', include('grappelli.urls')),
     path('admin/', admin.site.urls),
     path('', include('home.urls')),
-    path('accounts/',include('account.urls')),
+    path('product/', include('product.urls')),
+    path('accounts/', include('account.urls')),
     re_path(r'^ckeditor/upload/', login_required(ckeditor_views.upload), name='ckeditor_upload'),
     re_path(r'^ckeditor/browse/', never_cache(login_required(ckeditor_views.browse)), name='ckeditor_browse'),
 

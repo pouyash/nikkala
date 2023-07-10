@@ -11,6 +11,7 @@ from filebrowser.fields import FileBrowseField
 
 class Category(models.Model):
     title = models.CharField(max_length=300, verbose_name='دسته بندی')
+    parent = models.ForeignKey('Category', related_name='category', null=True, blank=True, on_delete=models.CASCADE, verbose_name='دسته بندی والد')
     slug = models.SlugField(max_length=400, verbose_name='عنوان در url', allow_unicode=True, unique=True)
     is_active = models.BooleanField(default=True, verbose_name='فعال/غیرفعال')
 
@@ -20,11 +21,11 @@ class Category(models.Model):
     def __str__(self):
         return self.slug
 
-    def save(
-        self, force_insert=False, force_update=False, using=None, update_fields=None
-    ):
-        self.slug = slugify(self.title)
-        super(Category, self).save()
+    # def save(
+    #     self, force_insert=False, force_update=False, using=None, update_fields=None
+    # ):
+    #     self.slug = slugify(self.title)
+    #     super(Category, self).save()
 
     class Meta:
         verbose_name = 'دسته بندی'
@@ -41,18 +42,18 @@ class Brand(models.Model):
     def __str__(self):
         return self.slug
 
-    def save(
-        self, force_insert=False, force_update=False, using=None, update_fields=None
-    ):
-        self.slug = slugify(self.title)
-        super(Brand, self).save()
+    # def save(
+    #     self, force_insert=False, force_update=False, using=None, update_fields=None
+    # ):
+    #     self.slug = slugify(self.title)
+    #     super(Brand, self).save()
 
     class Meta:
         verbose_name = 'برند'
         verbose_name_plural = 'برندها'
 
 class Product(models.Model):
-    title = models.CharField(max_length=300, verbose_name='برند')
+    title = models.CharField(max_length=300, verbose_name='عنوان')
     slug = models.SlugField(max_length=400, verbose_name='عنوان در url', allow_unicode=True, unique=True)
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE, related_name='product', verbose_name='برند')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='product', verbose_name='دسته بندی')
