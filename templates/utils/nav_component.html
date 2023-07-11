@@ -76,8 +76,8 @@
                     <li><a href="cart.html">سبد خرید</a></li>
                 </ul><!-- end sub menu-->
             </li>
-            <li><a href="contact-us.html">تماس با ما</a></li>
-            <li><a href="about-us.html">درباره ما</a></li>
+            <li {% if request.path == '/contact-us/' %} class="border-2 border-bottom border-success " {% endif %}><a  href="{% url 'contact_us' %}">تماس با ما</a></li>
+            <li {% if request.path == '/about-us/' %} class="border-2 border-bottom border-success " {% endif %}><a href="{% url 'about_us' %}">درباره ما</a></li>
         </ul>
     </div>
     <!- https://t.me/sabzrea ->

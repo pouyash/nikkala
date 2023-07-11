@@ -57,6 +57,8 @@ INSTALLED_APPS = [
     'product',
     'account',
     'polls',
+    'about_us',
+    'contact_us',
 
     # External app
 
