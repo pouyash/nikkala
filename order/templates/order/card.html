@@ -1,0 +1,78 @@
+{% extends 'main.html' %}
+{% load poll_extras %}
+{% block title %}
+    سبد خرید
+{% endblock %}
+{% block main %}
+    <main><!-- start main -->
+        <div class="container">
+
+            {% if ods %}
+                <div class="row">
+
+                    <div class="col-lg-9"><!-- start cart content -->
+                        <div class="cart-content">
+                            <div class="title">
+                                <h4> سبد خرید </h4>
+                            </div>
+
+                            {% for od in ods.order_detail.all %}
+                                <div class="row shopping-cart-item"><!-- start shopping cart item -->
+                                    <div class="col-lg-2 col-md-3">
+                                        <a href="product.html" class="d-block"><img src="{{ od.product.image.url }}"
+                                                                                    class="img-fluid mb-3"></a>
+                                    </div>
+                                    <div class="col-lg-5 col-md-6">
+                                        <a href="product.html" class="shopping-cart-title">
+                                            {{ od.product.title }}
+                                        </a>
+                                        <p class="shopping-cart-detail"> گارانتی : {{ od.product.gourantiee }}</p>
+                                        <p class="shopping-cart-detail">قیمت واحد : {{ od.product.price | three_digit }}
+                                            تومان</p>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3">
+                                        <div class="button-container d-flex justify-content-start align-items-start mb-3">
+                                            <button class="cart-qty-plus" type="button" value="+">+</button>
+                                            <input type="text" name="qty" min="0" class="qty form-control text-center"
+                                                   value="{{ od.count }}">
+                                            <button class="cart-qty-minus" type="button" value="-">-</button>
+                                        </div>
+                                        <p class="shopping-cart-detail">قیمت کل : {{ od.get_price | three_digit }}
+                                            تومان</p>
+                                    </div>
+                                    <div class="col-lg-2 col-md-12 d-flex justify-content-center align-items-center">
+                                        <i class="fa fa-trash delete-icon"></i>
+                                    </div>
+                                </div><!-- end shopping cart item -->
+                            {% endfor %}
+
+
+                        </div>
+                    </div><!-- end cart content -->
+
+                    <div class="col-lg-3"><!-- start cart box -->
+                        <div class="cart-content">
+                            <div class="product-seller-row">
+                                <span>فروشنده :</span>
+                                <span>نیک کالا</span>
+                            </div>
+                            <div class="product-seller-row">
+                                <span> مبلغ کل ({{ ods.order_detail.count }} نوع کالا) :</span>
+                                <span>{{ ods.get_total_price | three_digit }} تومان </span>
+                            </div>
+
+                            <a href="{% url 'request' %}" class="btn add-cart-btn">ادامه و ثبت سفارش</a>
+                            <p class="font-12 text-muted mt-3 line-height text-center"> کالاهای موجود در سبد شما ثبت و
+                                رزرو
+                                نشده&zwnj;اند، برای ثبت سفارش مراحل بعدی را تکمیل کنید. </p>
+                        </div>
+                    </div><!-- end cart box -->
+
+                </div>
+            {% else %}
+                <div class="alert alert-danger"> سبد خرید شما خالی می باشد</div>
+            {% endif %}
+
+        </div>
+    </main>
+{% endblock %}

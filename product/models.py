@@ -69,11 +69,11 @@ class Product(models.Model):
     def __str__(self):
         return self.slug
 
-    def save(
-        self, force_insert=False, force_update=False, using=None, update_fields=None
-    ):
-        self.slug = slugify(self.title)
-        super(Product, self).save()
+    # def save(
+    #     self, force_insert=False, force_update=False, using=None, update_fields=None
+    # ):
+    #     self.slug = slugify(self.title)
+    #     super(Product, self).save()
 
     class Meta:
         verbose_name = 'محصولات'

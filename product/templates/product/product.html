@@ -145,8 +145,11 @@
                                 <span>قیمت :</span>
                                 <span class="text-danger">{{ product.price | three_digit }} تومان</span>
                             </div>
-                            {% if product.number > 0 %}
-                                <button type="button" class="btn add-cart-btn">افزودن به سبد خرید</button>
+
+                            {% if product.number > 0 and request.user.is_authenticated %}
+                                <button type="button" class="btn add-cart-btn">
+                                    <a href="{% url 'add_to_card' slug=product.slug %}">افزودن به سبد خرید</a>
+                                </button>
                             {% else %}
                                 <button type="button" class="btn add-cart-btn" disabled>افزودن به سبد خرید</button>
                             {% endif %}

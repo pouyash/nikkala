@@ -17,6 +17,7 @@ urlpatterns = [
     path('accounts/', include('account.urls')),
     path('contact-us/', ContactUsView.as_view(), name='contact_us'),
     path('about-us/', AboutUsView.as_view(), name='about_us'),
+    path('order/', include('order.urls')),
     re_path(r'^ckeditor/upload/', login_required(ckeditor_views.upload), name='ckeditor_upload'),
     re_path(r'^ckeditor/browse/', never_cache(login_required(ckeditor_views.browse)), name='ckeditor_browse'),
 

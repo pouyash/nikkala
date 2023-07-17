@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'polls',
     'about_us',
     'contact_us',
+    'order',
 
     # External app
 
@@ -78,6 +79,8 @@ EMAIL_HOST = 'sandbox.smtp.mailtrap.io'
 EMAIL_HOST_USER = ls.EMAIL_HOST_USER_LS
 EMAIL_HOST_PASSWORD = ls.EMAIL_PASS_USER_LS
 EMAIL_PORT = '2525'
+
+LOGIN_REDIRECT_URL = '/accounts/login/'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

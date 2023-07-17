@@ -21,7 +21,7 @@ class BrandAdmin(admin.ModelAdmin):
 
 @register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['id', 'is_active', 'title']
+    list_display = ['id', 'is_active', 'title', 'number']
 
     prepopulated_fields = {
         'slug': ('title',)

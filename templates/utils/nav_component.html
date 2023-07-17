@@ -73,12 +73,11 @@
                     </li>
                     <li><a href="profile.html">پروفایل کاربر</a></li>
                     <li><a href="blog.html">وبلاگ</a></li>
-                    <li><a href="cart.html">سبد خرید</a></li>
+                    <li><a href="{% url 'card' %}">سبد خرید</a></li>
                 </ul><!-- end sub menu-->
             </li>
             <li {% if request.path == '/contact-us/' %} class="border-2 border-bottom border-success " {% endif %}><a  href="{% url 'contact_us' %}">تماس با ما</a></li>
             <li {% if request.path == '/about-us/' %} class="border-2 border-bottom border-success " {% endif %}><a href="{% url 'about_us' %}">درباره ما</a></li>
         </ul>
     </div>
-    <!- https://t.me/sabzrea ->
 </nav><!-- end main menu -->
