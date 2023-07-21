@@ -7,4 +7,11 @@ urlpatterns = [
     path('login/', views.LoginView.as_view(), name='login'),
     path('activate/<code>/', views.activate_email, name='activate_email'),
     path('logout/', views.log_out, name='logout'),
+
+    path('profile/', views.ProfileView.as_view(), name='profile'),
+    path('change_password_request/', views.ChangePasswordRequest.as_view(), name='change_password_request'),
+    path('change_password/<data>', views.ChangePassword.as_view(), name='change_password'),
+    path('change_password/', views.ChangePasswordPost.as_view(), name='change_password_post'),
+
+
 ]

@@ -27,6 +27,7 @@ class RegisterForm(forms.Form):
 
 
 class LoginForm(forms.Form):
+
     email = forms.CharField(widget=forms.EmailInput(attrs={
         'class': 'form-control form-control-lg signup-login-input'
     }))
@@ -34,3 +35,27 @@ class LoginForm(forms.Form):
     password = forms.CharField(label='رمز عبور', widget=forms.PasswordInput({
         'class': 'form-control form-control-lg signup-login-input'
     }))
+
+
+
+class ChangePasswordForm(forms.Form):
+    password = forms.CharField(label='رمز عبور جدید', widget=forms.PasswordInput(attrs={
+        'label': 'رمز عبور',
+        'class': 'form-control form-control-lg signup-login-input',
+        'placeholder': 'رمز عبور جدید'
+    }))
+
+    confirm_password = forms.CharField(label='تکرار رمز عبور', widget=forms.PasswordInput(attrs={
+        'label': 'تکرار رمز عبور',
+        'class': 'form-control form-control-lg signup-login-input',
+        'placeholder': 'تکرار رمز عبور'
+    }))
+
+    def clean_confirm_password(self):
+        password = self.cleaned_data.get('password')
+        confirm_password = self.cleaned_data.get('confirm_password')
+
+        if password == confirm_password:
+            return confirm_password
+        else:
+            raise ValidationError('رمز عبور جدید با تکرار رمز عبور متفاوت است.')

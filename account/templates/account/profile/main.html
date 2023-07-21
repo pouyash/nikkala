@@ -1,0 +1,60 @@
+{% extends 'account/profile/index.html' %}
+{% block title %}
+    حساب کاربری - صفحه اصلی
+{% endblock %}
+
+{% block content %}
+    <div class="profile-card">
+        <div class="row">
+
+            <div class="col-lg-6"><!-- start personal info box -->
+                <p class="font-13"> اطلاعات شخصی </p>
+                <div class="card font-13 text-center">
+                    <div class="row mx-0 ">
+                        <div class="col-6 pt-2 border-bottom border-end"><p> نام و نام خانوادگی :</p>
+                            <p>{{ user.get_full_name }}</p></div>
+                        <div class="col-6 pt-2 border-bottom"><p>پست الکترونیک :</p>
+                            <p>{{ user.email }}</p></div>
+                        <div class="col-6 pt-2 border-bottom border-end"><p>شماره تلفن همراه :</p>
+                            <p>{{ user.phone_number }}</p></div>
+                        <div class="col-6 pt-2 border-bottom"><p>کد ملی :</p>
+                            <p>-</p></div>
+                        <div class="col-6 pt-2 border-end"><p>دریافت خبرنامه :</p>
+                            <p>بله</p></div>
+                        <div class="col-6 pt-2"><p>شماره کارت :</p>
+                            <p>-</p></div>
+                    </div>
+                </div>
+                <a href="profile-info.html" class="profile-edit-link"><i class="fa fa-edit align-middle"></i> ویرایش
+                    اطلاعات
+                    شخصی</a>
+            </div><!-- end personal info box -->
+
+            <div class="col-lg-6"><!-- start recent fav list -->
+                <p class="font-13">لیست آخرین علاقه‌مندی‌ها</p>
+                <div class="card">
+                    <div class="profile-recent-fav">
+                        <a href="product.html"><img src="assets/images/mobile1.jpg" class="profile-recent-fav-img"></a>
+                        <div>
+                            <a href="product.html">گوشی موبایل سامسونگ مدل Galaxy A21S SM-A217F/DS</a>
+                            <i class="fa fa-trash font-13"></i>
+                            <i class="fa fa-cart-plus font-13"></i>
+                        </div>
+                    </div>
+                    <div class="profile-recent-fav">
+                        <a href="product.html"><img src="assets/images/mobile2.jpg" class="profile-recent-fav-img"></a>
+                        <div>
+                            <a href="product.html">گوشی موبایل سامسونگ مدل Galaxy A21S SM-A217F/DS</a>
+                            <i class="fa fa-trash font-13"></i>
+                            <i class="fa fa-cart-plus font-13"></i>
+                        </div>
+                    </div>
+                </div>
+                <a href="profile-fav-list.html" class="profile-edit-link"><i class="fa fa-edit align-middle"></i> ویرایش
+                    لیست
+                    علاقمندی ها</a>
+            </div><!-- end recent fav list -->
+
+        </div>
+    </div>
+{% endblock %}

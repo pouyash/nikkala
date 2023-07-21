@@ -66,3 +66,6 @@ class User(AbstractBaseUser):
     class Meta:
         verbose_name = 'کاربر'
         verbose_name_plural = 'کاربران'
+
+    def get_full_name(self):
+        return self.first_name + " " + self.last_name

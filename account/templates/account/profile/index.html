@@ -1,0 +1,31 @@
+{% extends 'main.html' %}
+{% load render_partial %}
+{% block title %}
+    حساب کاربری
+{% endblock %}
+{% block main %}
+
+    <main><!-- start main -->
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-3">
+
+                    {% render_partial 'account.views.avatar_component' %}
+
+                    {% include 'account/profile/sidbar.html' %}
+
+                </div>
+
+
+                <div class="col-lg-9">
+                    {% block content %}
+
+                    {% endblock %}
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+{% endblock %}
