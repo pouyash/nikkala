@@ -3,7 +3,13 @@
     <ul class="profile-sidebar">
         <li><a href="{% url 'profile' %}" {% if request.path == '/accounts/profile/' %} class="text-info" {% endif %}><i class="far fa-user-circle align-middle me-2"></i>پروفایل</a>
         </li>
-        <li><a href="profile-order.html"><i class="fas fa-shopping-cart align-middle me-2"></i>همه سفارش ها</a></li>
+        <li>
+            <a href="{% url 'user_orders' %}"
+                    {% if request.path == '/accounts/orders/' or request.resolver_match.view_name == 'user_order_detail' %} class="text-info" {% endif %}
+            >
+                <i class="fas fa-shopping-cart align-middle me-2"></i>
+                همه سفارش ها</a>
+        </li>
         <li><a href="profile-order-return.html"><i class="fa  fa-retweet align-middle me-2"></i>درخواست مرجوعی</a></li>
         <li><a href="profile-fav-list.html"><i class="far fa-heart align-middle me-2"></i>لیست علاقمندی ها</a></li>
         <li><a href="profile-comment.html"><i class="far fa-comment align-middle me-2"></i>نظرات</a></li>

@@ -1,0 +1,45 @@
+{% extends 'account/profile/index.html' %}
+{% load poll_extras %}
+{% block title %}
+    حساب کاربری - خریدها
+{% endblock %}
+
+{% block content %}
+    <div class="profile-card">
+        <div class="row">
+            {% if order_details %}
+                <table class="table table-striped table-dark">
+                    <thead>
+                    <tr>
+                        <th scope="col">کد خرید</th>
+                        <th scope="col">محصول</th>
+                        <th scope="col">تعداد</th>
+                        <th scope="col">قیمت</th>
+                        <th scope="col">قیمت نهایی</th>
+                        <th scope="col">تصویر</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    {% for od in order_details %}
+                        <tr>
+                            <th scope="row">{{ od.id }}</th>
+                            <td>{{ od.product.title }}</td>
+                            <td>{{ od.count }}</td>
+                            <td>{{ od.product.price | three_digit }}</td>
+                            <td>{{ od.get_price | three_digit }}</td>
+                            <td><img width="50" src="{{ od.product.image.url }}" alt=""></td>
+
+                        </tr>
+                    {% endfor %}
+
+
+                    </tbody>
+                </table>
+            {% else %}
+                <div class="alert alert-warning">فاکتوری یافت نشد</div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

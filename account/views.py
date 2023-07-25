@@ -1,12 +1,14 @@
 import sweetify
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpRequest
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.decorators import method_decorator
 from django.views.decorators.http import require_http_methods, require_GET, require_POST
+from django.views.generic import ListView, DetailView
 from requests import post
 
+from order.models import Order, OrderDetail
 from utils.functions import create_activation_code
 # Create your views here.
 from django.urls import reverse
@@ -178,3 +180,27 @@ def avatar_component(request):
     }
     return render(request, 'account/profile/avatar_component.html', context)
 
+
+@method_decorator(login_required, name='dispatch')
+class ListOrderView(ListView):
+    model = Order
+    template_name = 'account/profile/list_order.html'
+    context_object_name = 'orders'
+
+    def get_queryset(self):
+        qs = super(ListOrderView, self).get_queryset()
+        qs = qs.filter(user=self.request.user, is_paid=True)
+        return qs
+
+
+@method_decorator(login_required, name='dispatch')
+class OrderDetailView(ListView):
+    model = OrderDetail
+    template_name = 'account/profile/detail_order.html'
+    context_object_name = 'order_details'
+
+    def get_queryset(self):
+        print(self.request.resolver_match.view_name)
+        qs = super(OrderDetailView, self).get_queryset()
+        qs = qs.filter(order__id=self.kwargs.get('pk'), order__user=self.request.user, order__is_paid=True)
+        return qs

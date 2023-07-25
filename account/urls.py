@@ -12,6 +12,7 @@ urlpatterns = [
     path('change_password_request/', views.ChangePasswordRequest.as_view(), name='change_password_request'),
     path('change_password/<data>', views.ChangePassword.as_view(), name='change_password'),
     path('change_password/', views.ChangePasswordPost.as_view(), name='change_password_post'),
-
+    path('orders/', views.ListOrderView.as_view(), name='user_orders'),
+    path('orders_detail/<pk>', views.OrderDetailView.as_view(), name='user_order_detail'),
 
 ]
