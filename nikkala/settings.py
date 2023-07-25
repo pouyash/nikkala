@@ -60,6 +60,8 @@ INSTALLED_APPS = [
     'about_us',
     'contact_us',
     'order',
+    'blog',
+
 
     # External app
 
@@ -70,6 +72,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'ckeditor_uploader',
     'sweetify',
+    'jalali_date',
 
 ]
 

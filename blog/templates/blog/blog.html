@@ -1,0 +1,218 @@
+{% extends 'blog/main.html' %}
+{% load poll_extras %}
+{% load static %}
+{% block title %}
+    {{ blog.title | truncatewords:8 }}
+{% endblock %}
+{% block main %}
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-lg-12"><!-- start blog content -->
+                <div class="blog-content">
+
+                    <div class="blog-content-title">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <h1>{{ blog.title }}</h1>
+                            <i class="far fa-heart font-20 text-muted"></i>
+                        </div>
+                        <span class="content-writer">{{ blog.category.title }}</span>
+                        <span class="d-inline-block font-13 text-muted"><i
+                                class="far fa-clock"></i> {{ blog.created_at | jalali_date_time }}</span>
+                    </div>
+
+                    <img src="{{ blog.image.url }}" class="blog-detail-pic">
+
+                    <p>
+                        {{ blog.description | safe }}
+                    </p>
+
+
+                    <div class="row px-2"><!-- start comment title -->
+                        <div class="col-12 blog-comment-title mt-5">
+                            <h3> دیدگاه شما </h3>
+                        </div>
+                    </div><!-- end comment title -->
+
+                    <div class="row"><!-- start comment form -->
+                        <form method="post" action="">
+                            {% csrf_token %}
+                            {% if request.user.is_authenticated %}
+                            {% else %}
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="mt-3">
+                                            {{ forms.name }}
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="mt-3">
+                                            {{ forms.email }}
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            <div class="my-3">
+                                {{ forms.comment }}
+                            </div>
+                            <input type="submit" class="send-btn float-end" value="ثبت نظر">
+                        </form>
+                    </div><!-- end comment form -->
+
+                    <div class="row mx-1 mt-5"><!-- start comment box -->
+                    {% for comment in comments %}
+                        <div class="col-12 question-box">
+                            <div class="question-header">
+                                <div>
+                                    <img src="{% static 'assets/images/user.jpg' %}" class="user-comment-pic">
+                                    <span>{{ comment.name }}</span>
+                                </div>
+                                <p class="font-12 text-secondary">{{ comment.created_at | jalali_date }}</p>
+                            </div>
+                            <div class="question-body py-3">
+                               <p>{{ comment.comment }}</p>
+                            </div>
+                            <div class="question-footer">
+                                <span class="font-12 ms-3"><i
+                                        class="far fa-heart text-danger font-114 me-1"></i>(12)</span>
+                                <span class="font-12 ms-3"><i class="far fa-thumbs-up text-success font-14 me-1"></i>(8)</span>
+                                <span class="font-12 ms-3"><i class="far fa-thumbs-down text-muted font-14 me-1"></i>(0)</span>
+                            </div>
+                            {% for answer in comment.comment_blog_parent.all %}
+                                <div class="alert alert-warning">{{ answer.comment }}</div>
+                                {% endfor %}
+                        </div>
+                    {% endfor %}
+                    </div><!-- end comment box -->
+
+                </div>
+
+            </div><!-- end blog content -->
+
+        </div>
+
+        <div class="row mt-3"><!-- start title -->
+            <div class="col-12 d-flex align-items-center">
+                <h1 class="blog-title-text">مطالب پیشنهادی</h1>
+                <div class="blog-title-line"></div>
+                <a href="blog-category.html" class="blog-title-btn">همه مقالات <i
+                        class="fa fa-arrow-left align-middle"></i></a>
+            </div>
+        </div><!-- end title -->
+
+        <div class="row mt-3"><!-- start suggestion blog posts -->
+
+            <div class="col-lg-3 col-sm-6 mb-3"><!-- start item -->
+                <div class="card border-0 custom-blog-card">
+                    <div class="sub-layer">
+                        <img src="assets/images/mag-1.jpg" class="img-fluid">
+                        <div class="over-layer">
+                            <a href="blog-category.html" class="image-badge">آموزش آشپزی</a>
+                            <span class="image-like">(4)<i class="far fa-heart ms-1"></i></span>
+                        </div>
+                    </div>
+                    <div class="card-body pb-0">
+                        <a href="blog-detail.html">طرز تهیه رولت کرپ با کرم فندق بسیار آسان و بدون نیاز به فر</a>
+                        <p>
+                            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم
+                            از صنعت چاپ و با استفاده از طراحان گرافیک است.
+                            چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است.
+                        </p><!--- https://t.me/sabzrea --->
+                    </div>
+                    <div class="card-footer bg-white border-top-0">
+                        <img src="assets/images/person.jpg" class="person-pic">
+                        <span class="writer">سارا رضایی</span>
+                        <div class="float-end mt-2">
+                            <span class="time"><i class="fa fa-clock font-13 me-1"></i>2 ساعت قبل</span>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- end item -->
+
+            <div class="col-lg-3 col-sm-6 mb-3"><!-- start item -->
+                <div class="card border-0 custom-blog-card">
+                    <div class="sub-layer">
+                        <img src="assets/images/mag-2.jpg" class="img-fluid">
+                        <div class="over-layer">
+                            <a href="blog-category.html" class="image-badge">سبک زندگی</a>
+                            <span class="image-like">(4)<i class="far fa-heart ms-1"></i></span>
+                        </div>
+                    </div>
+                    <div class="card-body pb-0">
+                        <a href="blog-detail.html">بررسی خردکن سیلور کرست مدل SLMA مناسب کارهای دم‌دستی</a>
+                        <p>
+                            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم
+                            از صنعت چاپ و با استفاده از طراحان گرافیک است.
+                            چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است.
+                        </p>
+                    </div>
+                    <div class="card-footer bg-white border-top-0"><!--- https://t.me/sab zrea --->
+                        <img src="assets/images/person.jpg" class="person-pic">
+                        <span class="writer">سارا رضایی</span>
+                        <div class="float-end mt-2">
+                            <span class="time"><i class="fa fa-clock font-13 me-1"></i>2 ساعت قبل</span>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- end item -->
+
+            <div class="col-lg-3 col-sm-6 mb-3"><!-- start item -->
+                <div class="card border-0 custom-blog-card">
+                    <div class="sub-layer">
+                        <img src="assets/images/mag-3.jpg" class="img-fluid">
+                        <div class="over-layer">
+                            <a href="blog-category.html" class="image-badge">تکنولوژی</a>
+                            <span class="image-like">(4)<i class="far fa-heart ms-1"></i></span>
+                        </div>
+                    </div>
+                    <div class="card-body pb-0">
+                        <a href="blog-detail.html">۱۰ اشتباه که کاربران تازه‌ وارد گوشی‌های اندرویدی مرتکب می‌شوند</a>
+                        <p>
+                            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم
+                            از صنعت چاپ و با استفاده از طراحان گرافیک است.
+                            چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است.
+                        </p>
+                    </div>
+                    <div class="card-footer bg-white border-top-0">
+                        <img src="assets/images/person.jpg" class="person-pic">
+                        <span class="writer">سارا رضایی</span>
+                        <div class="float-end mt-2">
+                            <span class="time"><i class="fa fa-clock font-13 me-1"></i>2 ساعت قبل</span>
+                        </div>
+                    </div><!--- https://t.me/sa bzrea --->
+                </div>
+            </div><!-- end item -->
+
+            <div class="col-lg-3 col-sm-6 mb-3"><!-- start item -->
+                <div class="card border-0 custom-blog-card">
+                    <div class="sub-layer">
+                        <img src="assets/images/mag-4.jpg" class="img-fluid">
+                        <div class="over-layer">
+                            <a href="blog-category.html" class="image-badge">تکنولوژی</a>
+                            <span class="image-like">(4)<i class="far fa-heart ms-1"></i></span>
+                        </div>
+                    </div>
+                    <div class="card-body pb-0">
+                        <a href="blog-detail.html">راهنمای خرید بهترین گوشی سامسونگ سری A؛ گزینه‌های ایده‌آل خرید</a>
+                        <p>
+                            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم
+                            از صنعت چاپ و با استفاده از طراحان گرافیک است.
+                            چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است.
+                        </p>
+                    </div>
+                    <div class="card-footer bg-white border-top-0">
+                        <img src="assets/images/person.jpg" class="person-pic">
+                        <span class="writer">سارا رضایی</span>
+                        <div class="float-end mt-2">
+                            <span class="time"><i class="fa fa-clock font-13 me-1"></i>2 ساعت قبل</span>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- end item -->
+
+        </div><!-- end suggestion blog posts -->
+
+
+    </div>
+{% endblock %}

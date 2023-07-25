@@ -1,0 +1,25 @@
+{% load render_partial %}
+{% load static %}
+<html lang="fa" dir="rtl">
+<head>
+    {% include 'blog/utils/head.html' %}
+    <title>{% block title %}
+        وبلاگ نیک کالا
+    {% endblock %}</title>
+</head>
+<body>
+
+{% render_partial 'blog.views.nav_component' %}
+
+<main><!-- start main -->
+    {% block main %}
+
+    {% endblock %}
+
+</main><!-- end main -->
+
+{% render_partial 'blog.views.footer_component' %}
+
+
+</body>
+</html>

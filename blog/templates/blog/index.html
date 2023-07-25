@@ -1,0 +1,337 @@
+{% extends 'blog/main.html' %}
+{% load static %}
+{% block title %}
+وبلاگ نیک کالا
+{% endblock %}
+{% block main %}
+    <div class="container">
+
+        <div class="row mt-3"><!-- start top banner -->
+            <div class="col-12">
+                <a href="{% url 'blog' %}" target="_blank" class="w-100 d-block">
+                    <img src="{% static 'assets/images/blog-ads.jpg' %}" class="blog-pic">
+                </a>
+            </div>
+        </div><!-- end top banner -->
+
+        <div class="row">
+
+            <div class="col-lg-8"><!-- start blog slider -->
+                <div class="carousel slide" data-bs-ride="carousel" id="blog-slider">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#blog-slider" data-bs-slide-to="0" class=""></button>
+                        <button type="button" data-bs-target="#blog-slider" data-bs-slide-to="1" class=""></button>
+                        <button type="button" data-bs-target="#blog-slider" data-bs-slide-to="2" class="active"
+                                aria-current="true"></button>
+                    </div>
+                    <div class="carousel-inner mb-3">
+                        <div class="carousel-item">
+                            <a href="blog-detail.html" class="d-block">
+                                <img src="assets/images/mag-5.jpg" class="d-block w-100">
+                                <div class="carousel-caption">
+                                    <p class="font-13">اپل هدست ویژن پرو را با قیمت ۳۵۰۰ دلار معرفی کرد؛ ورود اپل به
+                                        بازار واقعیت ترکیبی</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="carousel-item active carousel-item-start">
+                            <a href="blog-detail.html" class="d-block">
+                                <img src="assets/images/mag-5.jpg" class="d-block w-100">
+                                <div class="carousel-caption">
+                                    <p class="font-13">اپل هدست ویژن پرو را با قیمت ۳۵۰۰ دلار معرفی کرد؛ ورود اپل به
+                                        بازار واقعیت ترکیبی</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="carousel-item carousel-item-next carousel-item-start">
+                            <a href="blog-detail.html" class="d-block">
+                                <img src="assets/images/mag-5.jpg" class="d-block w-100">
+                                <div class="carousel-caption">
+                                    <p class="font-13">اپل هدست ویژن پرو را با قیمت ۳۵۰۰ دلار معرفی کرد؛ ورود اپل به
+                                        بازار واقعیت ترکیبی</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <button type="button" class="carousel-control-prev" data-bs-target="#blog-slider"
+                            data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </button>
+                    <button type="button" class="carousel-control-next" data-bs-target="#blog-slider"
+                            data-bs-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </button>
+                </div>
+            </div><!-- end blog slider -->
+
+            <div class="col-lg-4"><!-- start left pic box -->
+                <div class="row">
+
+                    <div class="col-12 mb-3">
+                        <a href="blog-detail.html" class="sub-layer">
+                            <img src="assets/images/mag-7.jpg" class="blog-pic">
+                            <div class="pic-mask">
+                                <p>۱۰ عادت سالم و کارآمد برای اینکه چربی بیشتری آب کنید</p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-12 mb-3">
+                        <a href="blog-detail.html" class="sub-layer">
+                            <img src="assets/images/mag-8.jpg" class="blog-pic">
+                            <div class="pic-mask">
+                                <p>بهترین فیلم‌های فرانسوی تاریخ سینما</p>
+                            </div>
+                        </a>
+                    </div>
+
+                </div>
+            </div><!-- end left pic box -->
+
+        </div>
+
+        <div class="row mt-3"><!-- start title -->
+            <div class="col-12 d-flex align-items-center">
+                <h1 class="blog-title-text">جدیدترین مقالات </h1>
+                <div class="blog-title-line"></div>
+                <a href="blog-category.html" class="blog-title-btn">همه مقالات <i
+                        class="fa fa-arrow-left align-middle"></i></a>
+            </div>
+        </div><!-- end title -->
+
+        <div class="row mt-3"><!-- start new blog posts -->
+
+            <div class="col-lg-3 col-sm-6 mb-3"><!-- start item -->
+                <div class="card border-0 custom-blog-card">
+                    <div class="sub-layer">
+                        <img src="assets/images/mag-1.jpg" class="img-fluid">
+                        <div class="over-layer">
+                            <a href="blog-category.html" class="image-badge">آموزش آشپزی</a>
+                            <span class="image-like">(4)<i class="far fa-heart ms-1"></i></span>
+                        </div>
+                    </div>
+                    <div class="card-body pb-0">
+                        <a href="blog-detail.html">طرز تهیه رولت کرپ با کرم فندق بسیار آسان و بدون نیاز به فر</a>
+                        <p>
+                            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم
+                            از صنعت چاپ و با استفاده از طراحان گرافیک است.
+                            چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است.
+                        </p>
+                    </div>
+                    <div class="card-footer bg-white border-top-0">
+                        <img src="assets/images/person.jpg" class="person-pic">
+                        <span class="writer">سارا رضایی</span>
+                        <div class="float-end mt-2">
+                            <span class="time"><i class="fa fa-clock font-13 me-1"></i>2 ساعت قبل</span>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- end item -->
+
+            <div class="col-lg-3 col-sm-6 mb-3"><!-- start item -->
+                <div class="card border-0 custom-blog-card">
+                    <div class="sub-layer">
+                        <img src="assets/images/mag-2.jpg" class="img-fluid">
+                        <div class="over-layer">
+                            <a href="blog-category.html" class="image-badge">سبک زندگی</a>
+                            <span class="image-like">(4)<i class="far fa-heart ms-1"></i></span>
+                        </div>
+                    </div>
+                    <div class="card-body pb-0">
+                        <a href="blog-detail.html">بررسی خردکن سیلور کرست مدل SLMA مناسب کارهای دم‌دستی</a>
+                        <p>
+                            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم
+                            از صنعت چاپ و با استفاده از طراحان گرافیک است.
+                            چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است.
+                        </p>
+                    </div>
+                    <div class="card-footer bg-white border-top-0">
+                        <img src="assets/images/person.jpg" class="person-pic">
+                        <span class="writer">سارا رضایی</span>
+                        <div class="float-end mt-2">
+                            <span class="time"><i class="fa fa-clock font-13 me-1"></i>2 ساعت قبل</span>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- end item -->
+
+            <div class="col-lg-3 col-sm-6 mb-3"><!-- start item -->
+                <div class="card border-0 custom-blog-card">
+                    <div class="sub-layer">
+                        <img src="assets/images/mag-3.jpg" class="img-fluid">
+                        <div class="over-layer">
+                            <a href="blog-category.html" class="image-badge">تکنولوژی</a><!--- https://t.me/sabzrea --->
+                            <span class="image-like">(4)<i class="far fa-heart ms-1"></i></span>
+                        </div>
+                    </div><!--- https://t.me/sabzrea --->
+                    <div class="card-body pb-0">
+                        <a href="blog-detail.html">۱۰ اشتباه که کاربران تازه‌ وارد گوشی‌های اندرویدی مرتکب می‌شوند</a>
+                        <p>
+                            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم
+                            از صنعت چاپ و با استفاده از طراحان گرافیک است.
+                            چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است.
+                        </p>
+                    </div>
+                    <div class="card-footer bg-white border-top-0">
+                        <img src="assets/images/person.jpg" class="person-pic">
+                        <span class="writer">سارا رضایی</span>
+                        <div class="float-end mt-2">
+                            <span class="time"><i class="fa fa-clock font-13 me-1"></i>2 ساعت قبل</span>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- end item -->
+
+            <div class="col-lg-3 col-sm-6 mb-3"><!-- start item -->
+                <div class="card border-0 custom-blog-card">
+                    <div class="sub-layer">
+                        <img src="assets/images/mag-4.jpg" class="img-fluid">
+                        <div class="over-layer">
+                            <a href="blog-category.html" class="image-badge">تکنولوژی</a>
+                            <span class="image-like">(4)<i class="far fa-heart ms-1"></i></span>
+                        </div>
+                    </div>
+                    <div class="card-body pb-0">
+                        <a href="blog-detail.html">راهنمای خرید بهترین گوشی سامسونگ سری A؛ گزینه‌های ایده‌آل خرید</a>
+                        <p>
+                            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم
+                            از صنعت چاپ و با استفاده از طراحان گرافیک است.
+                            چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است.
+                        </p>
+                    </div>
+                    <div class="card-footer bg-white border-top-0">
+                        <img src="assets/images/person.jpg" class="person-pic">
+                        <span class="writer">سارا رضایی</span>
+                        <div class="float-end mt-2">
+                            <span class="time"><i class="fa fa-clock font-13 me-1"></i>2 ساعت قبل</span>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- end item -->
+
+        </div><!-- end new blog posts -->
+
+        <div class="row mt-3"><!-- start title -->
+            <div class="col-12 d-flex align-items-center">
+                <h1 class="blog-title-text">منتخب علم و تکنولوژی</h1>
+                <div class="blog-title-line"></div>
+                <a href="blog-category.html" class="blog-title-btn">همه مقالات <i
+                        class="fa fa-arrow-left align-middle"></i></a>
+            </div>
+        </div><!-- end title -->
+
+
+        <div class="row mt-3"><!-- start best blog posts -->
+
+            <div class="col-lg-3 col-sm-6 mb-3"><!-- start item -->
+                <div class="card border-0 custom-blog-card">
+                    <div class="sub-layer">
+                        <img src="assets/images/mag-1.jpg" class="img-fluid">
+                        <div class="over-layer">
+                            <a href="blog-category.html" class="image-badge">آموزش آشپزی</a>
+                            <span class="image-like">(4)<i class="far fa-heart ms-1"></i></span>
+                        </div>
+                    </div>
+                    <div class="card-body pb-0">
+                        <a href="blog-detail.html">طرز تهیه رولت کرپ با کرم فندق بسیار آسان و بدون نیاز به فر</a>
+                        <p>
+                            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم
+                            از صنعت چاپ و با استفاده از طراحان گرافیک است.
+                            چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است.
+                        </p>
+                    </div>
+                    <div class="card-footer bg-white border-top-0">
+                        <img src="assets/images/person.jpg" class="person-pic">
+                        <span class="writer">سارا رضایی</span>
+                        <div class="float-end mt-2">
+                            <span class="time"><i class="fa fa-clock font-13 me-1"></i>2 ساعت قبل</span>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- end item -->
+
+            <div class="col-lg-3 col-sm-6 mb-3"><!-- start item --><!--- https://t.me/sabzrea --->
+                <div class="card border-0 custom-blog-card">
+                    <div class="sub-layer">
+                        <img src="assets/images/mag-2.jpg" class="img-fluid">
+                        <div class="over-layer">
+                            <a href="blog-category.html" class="image-badge">سبک زندگی</a>
+                            <span class="image-like">(4)<i class="far fa-heart ms-1"></i></span>
+                        </div>
+                    </div>
+                    <div class="card-body pb-0">
+                        <a href="blog-detail.html">بررسی خردکن سیلور کرست مدل SLMA مناسب کارهای دم‌دستی</a>
+                        <p>
+                            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم
+                            از صنعت چاپ و با استفاده از طراحان گرافیک است.
+                            چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است.
+                        </p>
+                    </div>
+                    <div class="card-footer bg-white border-top-0">
+                        <img src="assets/images/person.jpg" class="person-pic">
+                        <span class="writer">سارا رضایی</span>
+                        <div class="float-end mt-2">
+                            <span class="time"><i class="fa fa-clock font-13 me-1"></i>2 ساعت قبل</span>
+                        </div><!--- https://t.me/sabzrea --->
+                    </div>
+                </div>
+            </div><!-- end item -->
+
+            <div class="col-lg-3 col-sm-6 mb-3"><!-- start item -->
+                <div class="card border-0 custom-blog-card">
+                    <div class="sub-layer">
+                        <img src="assets/images/mag-3.jpg" class="img-fluid">
+                        <div class="over-layer">
+                            <a href="blog-category.html" class="image-badge">تکنولوژی</a>
+                            <span class="image-like">(4)<i class="far fa-heart ms-1"></i></span>
+                        </div>
+                    </div>
+                    <div class="card-body pb-0">
+                        <a href="blog-detail.html">۱۰ اشتباه که کاربران تازه‌ وارد گوشی‌های اندرویدی مرتکب می‌شوند</a>
+                        <p>
+                            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم
+                            از صنعت چاپ و با استفاده از طراحان گرافیک است.
+                            چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است.
+                        </p>
+                    </div>
+                    <div class="card-footer bg-white border-top-0">
+                        <img src="assets/images/person.jpg" class="person-pic">
+                        <span class="writer">سارا رضایی</span>
+                        <div class="float-end mt-2">
+                            <span class="time"><i class="fa fa-clock font-13 me-1"></i>2 ساعت قبل</span>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- end item -->
+
+            <div class="col-lg-3 col-sm-6 mb-3"><!-- start item -->
+                <div class="card border-0 custom-blog-card">
+                    <div class="sub-layer">
+                        <img src="assets/images/mag-4.jpg" class="img-fluid">
+                        <div class="over-layer">
+                            <a href="blog-category.html" class="image-badge">تکنولوژی</a>
+                            <span class="image-like">(4)<i class="far fa-heart ms-1"></i></span>
+                        </div>
+                    </div>
+                    <div class="card-body pb-0">
+                        <a href="blog-detail.html">راهنمای خرید بهترین گوشی سامسونگ سری A؛ گزینه‌های ایده‌آل خرید</a>
+                        <p>
+                            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم
+                            از صنعت چاپ و با استفاده از طراحان گرافیک است.
+                            چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است.
+                        </p>
+                    </div>
+                    <div class="card-footer bg-white border-top-0">
+                        <img src="assets/images/person.jpg" class="person-pic">
+                        <span class="writer">سارا رضایی</span>
+                        <div class="float-end mt-2">
+                            <span class="time"><i class="fa fa-clock font-13 me-1"></i>2 ساعت قبل</span>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- end item -->
+
+        </div><!-- end best blog posts -->
+
+    </div>
+{% endblock %}

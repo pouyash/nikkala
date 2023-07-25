@@ -39,7 +39,7 @@
                 {% if request.user.is_authenticated %}
                     <li><a href="{% url 'profile' %}">حساب کاربری</a></li>
                 {% endif %}
-                    <li><a href="blog.html">وبلاگ</a></li>
+                    <li><a href="{% url 'blog' %}">وبلاگ</a></li>
                     <li><a href="{% url 'card' %}">سبد خرید</a></li>
                 </ul><!-- end sub menu-->
             </li>

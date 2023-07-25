@@ -1,0 +1,41 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark blog-navbar"><!-- start navbar -->
+    <div class="container">
+        <a class="navbar-brand" href="{% url 'blog' %}">
+            <img src="{% static 'assets/images/blog-logo.jpg' %}">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#blog-nav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="blog-nav">
+            <ul class="navbar-nav w-100 text-center">
+                <li class="nav-item custom-nav-item"><a class="nav-link" href="{% url 'blog' %}">صفحه اصلی</a></li>
+                {% for parent_cat in categories %}
+                    {% if parent_cat.category_parent.all %}
+                    <li class="nav-item custom-nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="{% url 'blogs' cat=parent_cat.slug %}"
+                           data-bs-toggle="dropdown">{{ parent_cat.title }}</a>
+
+                        <div class="dropdown-menu custom-blog-dropdown-menu"><!-- start sub menu -->
+                            {% for cat in parent_cat.category_parent.all %}
+                                {% if cat %}
+                                    <a href="{% url 'blogs' cat=cat.slug %}" class="dropdown-item">{{ cat.title }}</a>
+                                {% endif %}
+                            {% endfor %}
+                        </div><!-- end sub menu -->
+
+                    </li>
+                        {% else %}
+                        <li class="nav-item custom-nav-item"><a class="nav-link" href="{% url 'blogs' cat=parent_cat.slug %}">{{ parent_cat.title }}</a></li>
+                    {% endif %}
+
+                {% endfor %}
+            </ul>
+            <form>
+                <div class="search-in-result  position-relative">
+                    <input type="search" class="form-control" placeholder="جستجو">
+                </div>
+            </form>
+        </div>
+    </div>
+</nav><!-- end navbar -->
