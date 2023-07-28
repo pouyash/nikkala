@@ -7,14 +7,23 @@ from django.views import View
 
 from order.models import Order
 from product.models import Category
+from settings.models import Slider, AdvertiseTopIndex, AdvertiseMiddleIndex, AdvertiseBottomIndex, FooterCapability
 
 
 class HomeView(View):
     def get(self, request):
+        sliders = Slider.objects.filter(is_active=True)
+        top_ads = AdvertiseTopIndex.objects.filter(is_active=True).last()
+        middle_ads = list(AdvertiseMiddleIndex.objects.filter(is_active=True).order_by('-id'))[0:4]
+        bottom_ads = list(AdvertiseBottomIndex.objects.filter(is_active=True).order_by('-id'))[0:2]
         context = {
-
+            'sliders': sliders,
+            'top_ads': top_ads,
+            'middle_ads': middle_ads,
+            'bottom_ads': bottom_ads,
         }
         return render(request, 'home/index.html', context)
+
 
 def nav_component(request):
     categories_parent = Category.objects.filter(parent=None)
@@ -24,8 +33,9 @@ def nav_component(request):
     return render(request, 'utils/nav_component.html', context)
 
 def footer_component(request):
+    footer_capabilities = list(FooterCapability.objects.filter(is_active=True).order_by('-id'))[0:5]
     context = {
-
+        'footer_capabilities': footer_capabilities,
     }
     return render(request, 'utils/footer_component.html', context)
 
@@ -44,9 +54,11 @@ def header_component(request):
             count = count['count_product']
     else:
         order = False
-    print("*********************", count)
+
+    categories_parent = Category.objects.filter(parent=None)
     context = {
         'order': order,
         'count':count,
+        'categories_parent':categories_parent,
     }
     return render(request, 'utils/header.html', context)

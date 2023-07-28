@@ -21,7 +21,6 @@
 
                 </ul>
             </li>
-            <li><a href="search.html">تخفیف‌ها و پیشنهادها</a></li>
             <li class="has-sub-menu"><a href="#">صفحات <i class="fa fa-angle-down"></i></a>
                 <ul class="sub-menu"><!-- start sub menu-->
                     {% if request.user.is_authenticated %}
@@ -29,13 +28,6 @@
                     {% else %}
                         <li><a href="{% url 'register' %}">ثبت نام / ورود</a></li>
                     {% endif %}
-                    <li class="has-sub-menu-level-2"><a href="#">محصولات</a><i class="fa fa-angle-down"></i>
-                        <ul class="sub-menu-level-2"><!-- start sub menu level 2 -->
-                            <li><a href="product.html">محصول موجود</a></li>
-                            <li><a href="product-unavailable.html">محصول ناموجود</a></li>
-                            <li><a href="404.html">خطای 404</a></li>
-                        </ul><!-- end sub menu level 2 -->
-                    </li>
                 {% if request.user.is_authenticated %}
                     <li><a href="{% url 'profile' %}">حساب کاربری</a></li>
                 {% endif %}

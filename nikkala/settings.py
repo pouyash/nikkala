@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'contact_us',
     'order',
     'blog',
+    'settings',
 
 
     # External app

@@ -3,16 +3,12 @@
 <footer><!-- start footer -->
     <div class="container">
         <div class="row footer-svg-icons border-bottom mx-2 py-2">
-            <div class="col-6 col-md text-center"><img src="assets/images/1.svg">
-                <p>تحویل اکسپرس</p></div>
-            <div class="col-6 col-md text-center"><img src="assets/images/2.svg">
-                <p>پشتیبانی 24 ساعته </p></div>
-            <div class="col-6 col-md text-center"><img src="assets/images/3.svg">
-                <p>پرداخت در محل </p></div>
-            <div class="col-6 col-md text-center"><img src="assets/images/4.svg">
-                <p>7 روز ضمانت بازگشت کالا</p></div>
-            <div class="col-12 col-md text-center"><img src="assets/images/5.svg">
-                <p>ضمانت اصل بودن کالا</p></div>
+            {% for footer_cap in footer_capabilities %}
+            <div class="col-6 col-md text-center">
+                <img src="{{ footer_cap.image.url }}">
+                <p>{{ footer_cap.title }}</p>
+            </div>
+            {% endfor %}
         </div>
         <div class="row"><!-- start footer box -->
             <div class="col-lg-2 col-sm-6 footer-box">
