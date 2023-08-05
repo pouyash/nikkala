@@ -15,78 +15,11 @@
             </div>
         </div><!-- end top banner -->
 
-        <div class="row">
-
-            <div class="col-lg-8"><!-- start blog slider -->
-                <div class="carousel slide" data-bs-ride="carousel" id="blog-slider">
-                    <div class="carousel-indicators">
-                        <button type="button" data-bs-target="#blog-slider" data-bs-slide-to="0" class=""></button>
-                        <button type="button" data-bs-target="#blog-slider" data-bs-slide-to="1" class=""></button>
-                        <button type="button" data-bs-target="#blog-slider" data-bs-slide-to="2" class="active"
-                                aria-current="true"></button>
-                    </div>
-                    <div class="carousel-inner mb-3">
-                        <div class="carousel-item">
-                            <a href="blog-detail.html" class="d-block">
-                                <img src="{% static 'assets/images/mag-5.jpg' %}" class="d-block w-100">
-                                <div class="carousel-caption">
-                                    <p class="font-13">اپل هدست ویژن پرو را با قیمت ۳۵۰۰ دلار معرفی کرد؛ ورود اپل به
-                                        بازار واقعیت ترکیبی</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="carousel-item active carousel-item-start">
-                            <a href="blog-detail.html" class="d-block">
-                                <img src="{% static 'assets/images/mag-5.jpg' %}" class="d-block w-100">
-                                <div class="carousel-caption">
-                                    <p class="font-13">اپل هدست ویژن پرو را با قیمت ۳۵۰۰ دلار معرفی کرد؛ ورود اپل به
-                                        بازار واقعیت ترکیبی</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="carousel-item carousel-item-next carousel-item-start">
-                            <a href="blog-detail.html" class="d-block">
-                                <img src="{% static 'assets/images/mag-5.jpg' %}" class="d-block w-100">
-                                <div class="carousel-caption">
-                                    <p class="font-13">اپل هدست ویژن پرو را با قیمت ۳۵۰۰ دلار معرفی کرد؛ ورود اپل به
-                                        بازار واقعیت ترکیبی</p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <button type="button" class="carousel-control-prev" data-bs-target="#blog-slider"
-                            data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon"></span>
-                    </button>
-                    <button type="button" class="carousel-control-next" data-bs-target="#blog-slider"
-                            data-bs-slide="next">
-                        <span class="carousel-control-next-icon"></span>
-                    </button>
-                </div>
-            </div><!-- end blog slider -->
-
-            <div class="col-lg-4"><!-- start left pic box -->
-                <div class="row">
-                    {% for ls in left_sides %}
-                        <div class="col-12 mb-3">
-                            <a href="{% url 'blog_detail' slug=ls.slug %}" class="sub-layer">
-                                <img src="{{ ls.image.url }}" class="blog-pic">
-                                <div class="pic-mask">
-                                    <p>{{ ls.title }}</p>
-                                </div>
-                            </a>
-                        </div>
-                    {% endfor %}
-                </div>
-            </div><!-- end left pic box -->
-
-        </div>
-
         <div class="row mt-3"><!-- start title -->
             <div class="col-12 d-flex align-items-center">
                 <h1 class="blog-title-text">جدیدترین مقالات </h1>
                 <div class="blog-title-line"></div>
-                <a href="blog-category.html" class="blog-title-btn">همه مقالات <i
+                <a href="{% url 'blogs' cat='all' %}" class="blog-title-btn">همه مقالات <i
                         class="fa fa-arrow-left align-middle"></i></a>
             </div>
         </div><!-- end title -->

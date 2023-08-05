@@ -81,4 +81,19 @@ class CommentBlog(models.Model):
         verbose_name_plural = "نظرات"
 
 
+class BlogBanner(models.Model):
+    title = models.CharField(max_length=500, verbose_name="عنوان")
+    image = models.ImageField(upload_to='blog/header/%y/%m/', verbose_name='تصویر')
+    blog = models.OneToOneField(Blog, on_delete=models.CASCADE, related_name='blog_header', verbose_name="وبلاگ مرتبط")
 
+    is_active = models.BooleanField(default=True, verbose_name='فعال / غیرفعال')
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = "بلاگ بنر"
+        verbose_name_plural = "بلاگ بنر"

@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.admin import register
 
-from blog.models import Blog, CategoryBlog, Tag, CommentBlog
+from blog.models import Blog, CategoryBlog, Tag, CommentBlog, BlogBanner
 
 
 @register(CategoryBlog)
@@ -38,6 +38,11 @@ class BlogAdmin(admin.ModelAdmin):
 class CommentBlogAdmin(admin.ModelAdmin):
     list_display = ['id', 'name', 'email', 'parent', 'is_active', 'like_count']
 
+
+@register(BlogBanner)
+class BlogBannerAdmin(admin.ModelAdmin):
+    list_display = ['id', 'title', 'is_active']
+    list_editable = ('title', 'is_active')
 
 
 

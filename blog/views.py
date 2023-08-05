@@ -11,7 +11,7 @@ from django.views.generic import TemplateView, ListView, DetailView
 from sweetify.templatetags.sweetify import sweetify
 
 from blog.forms import BlogCommentForm
-from blog.models import Blog, CategoryBlog, CommentBlog
+from blog.models import Blog, CategoryBlog, CommentBlog, BlogBanner
 from settings.models import SocialMedia
 
 
@@ -31,14 +31,19 @@ class BlogsView(ListView):
     template_name = 'blog/blogs.html'
     model = Blog
     context_object_name = "blogs"
+    paginate_by = 2
 
     def get_queryset(self):
         cat = self.kwargs.get('cat')
         qs = super(BlogsView, self).get_queryset()
-        qs = qs.filter(category__slug__icontains=cat)
+        if cat != 'all':
+            qs = qs.filter(category__slug__icontains=cat)
         return qs
-    
 
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(BlogsView, self).get_context_data()
+        context['banner'] = BlogBanner.objects.filter(is_active=True).last()
+        return context
 
 
 
@@ -60,6 +65,8 @@ class BlogDetailView(DetailView):
         context['forms'] = BlogCommentForm()
         blog_slug = self.kwargs.get('slug')
         context['comments'] = CommentBlog.objects.filter(is_active=True, parent=None, blog__slug=blog_slug).order_by('-id')
+        blog = Blog.objects.get(slug=blog_slug)
+        context['recommends'] = set(Blog.objects.filter(Q(category__slug__icontains=blog.category.slug) | Q(tags__in=blog.tags.all())).exclude(id=blog.id))
         blog = Blog.objects.get(slug=blog_slug)
         id = blog.id
         ip = self.request.META.get('REMOTE_ADDR')

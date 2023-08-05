@@ -16,9 +16,11 @@
                         <div class="d-flex align-items-center justify-content-between">
                             <h1>{{ blog.title }}</h1>
                             {% if has_favorite %}
-                                <a href="{% url 'blog_add_to_favorite' id=blog.id %}"><i class="fas fa-heart font-20 text-muted"></i></a>
+                                <a href="{% url 'blog_add_to_favorite' id=blog.id %}"><i
+                                        class="fas fa-heart font-20 text-muted"></i></a>
                             {% else %}
-                                 <a href="{% url 'blog_add_to_favorite' id=blog.id %}"><i class="far fa-heart font-20 text-muted"></i></a>
+                                <a href="{% url 'blog_add_to_favorite' id=blog.id %}"><i
+                                        class="far fa-heart font-20 text-muted"></i></a>
                             {% endif %}
                         </div>
                         <span class="content-writer">{{ blog.category.title }}</span>
@@ -109,115 +111,31 @@
         </div><!-- end title -->
 
         <div class="row mt-3"><!-- start suggestion blog posts -->
-
-            <div class="col-lg-3 col-sm-6 mb-3"><!-- start item -->
-                <div class="card border-0 custom-blog-card">
-                    <div class="sub-layer">
-                        <img src="assets/images/mag-1.jpg" class="img-fluid">
-                        <div class="over-layer">
-                            <a href="blog-category.html" class="image-badge">آموزش آشپزی</a>
-                            <span class="image-like">(4)<i class="far fa-heart ms-1"></i></span>
+            {% for recommend in recommends %}
+                <div class="col-lg-3 col-sm-6 mb-3"><!-- start item -->
+                    <div class="card border-0 custom-blog-card">
+                        <div class="sub-layer">
+                            <img src="{{ recommend.image.url }}" class="img-fluid">
+                            <div class="over-layer">
+                                <a href="{% url 'blog_detail' slug=recommend.slug %}" class="image-badge">{{ recommend.title }}</a>
+                            </div>
+                        </div>
+                        <div class="card-body pb-0">
+                            <a href="{% url 'blog_detail' slug=recommend.slug %}">{{ recommend.short_description | truncatewords:12 }}</a>
+                            <p>
+                                {{ recommend.description | truncatewords:20 | safe }}
+                            </p>
+                        </div>
+                        <div class="card-footer bg-white border-top-0">
+                            <img src="{{ recommend.image.url }}" class="person-pic">
+                            <span class="writer">{{ recommend.user.get_full_name }}</span>
+                            <div class="float-end mt-2">
+                                <span class="time"><i class="fa fa-clock font-13 me-1"></i>{{ recommend.created_at | jalali_date_time }}</span>
+                            </div>
                         </div>
                     </div>
-                    <div class="card-body pb-0">
-                        <a href="blog-detail.html">طرز تهیه رولت کرپ با کرم فندق بسیار آسان و بدون نیاز به فر</a>
-                        <p>
-                            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم
-                            از صنعت چاپ و با استفاده از طراحان گرافیک است.
-                            چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است.
-                        </p><!--- https://t.me/sabzrea --->
-                    </div>
-                    <div class="card-footer bg-white border-top-0">
-                        <img src="assets/images/person.jpg" class="person-pic">
-                        <span class="writer">سارا رضایی</span>
-                        <div class="float-end mt-2">
-                            <span class="time"><i class="fa fa-clock font-13 me-1"></i>2 ساعت قبل</span>
-                        </div>
-                    </div>
-                </div>
-            </div><!-- end item -->
-
-            <div class="col-lg-3 col-sm-6 mb-3"><!-- start item -->
-                <div class="card border-0 custom-blog-card">
-                    <div class="sub-layer">
-                        <img src="assets/images/mag-2.jpg" class="img-fluid">
-                        <div class="over-layer">
-                            <a href="blog-category.html" class="image-badge">سبک زندگی</a>
-                            <span class="image-like">(4)<i class="far fa-heart ms-1"></i></span>
-                        </div>
-                    </div>
-                    <div class="card-body pb-0">
-                        <a href="blog-detail.html">بررسی خردکن سیلور کرست مدل SLMA مناسب کارهای دم‌دستی</a>
-                        <p>
-                            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم
-                            از صنعت چاپ و با استفاده از طراحان گرافیک است.
-                            چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است.
-                        </p>
-                    </div>
-                    <div class="card-footer bg-white border-top-0"><!--- https://t.me/sab zrea --->
-                        <img src="assets/images/person.jpg" class="person-pic">
-                        <span class="writer">سارا رضایی</span>
-                        <div class="float-end mt-2">
-                            <span class="time"><i class="fa fa-clock font-13 me-1"></i>2 ساعت قبل</span>
-                        </div>
-                    </div>
-                </div>
-            </div><!-- end item -->
-
-            <div class="col-lg-3 col-sm-6 mb-3"><!-- start item -->
-                <div class="card border-0 custom-blog-card">
-                    <div class="sub-layer">
-                        <img src="assets/images/mag-3.jpg" class="img-fluid">
-                        <div class="over-layer">
-                            <a href="blog-category.html" class="image-badge">تکنولوژی</a>
-                            <span class="image-like">(4)<i class="far fa-heart ms-1"></i></span>
-                        </div>
-                    </div>
-                    <div class="card-body pb-0">
-                        <a href="blog-detail.html">۱۰ اشتباه که کاربران تازه‌ وارد گوشی‌های اندرویدی مرتکب می‌شوند</a>
-                        <p>
-                            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم
-                            از صنعت چاپ و با استفاده از طراحان گرافیک است.
-                            چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است.
-                        </p>
-                    </div>
-                    <div class="card-footer bg-white border-top-0">
-                        <img src="assets/images/person.jpg" class="person-pic">
-                        <span class="writer">سارا رضایی</span>
-                        <div class="float-end mt-2">
-                            <span class="time"><i class="fa fa-clock font-13 me-1"></i>2 ساعت قبل</span>
-                        </div>
-                    </div><!--- https://t.me/sa bzrea --->
-                </div>
-            </div><!-- end item -->
-
-            <div class="col-lg-3 col-sm-6 mb-3"><!-- start item -->
-                <div class="card border-0 custom-blog-card">
-                    <div class="sub-layer">
-                        <img src="assets/images/mag-4.jpg" class="img-fluid">
-                        <div class="over-layer">
-                            <a href="blog-category.html" class="image-badge">تکنولوژی</a>
-                            <span class="image-like">(4)<i class="far fa-heart ms-1"></i></span>
-                        </div>
-                    </div>
-                    <div class="card-body pb-0">
-                        <a href="blog-detail.html">راهنمای خرید بهترین گوشی سامسونگ سری A؛ گزینه‌های ایده‌آل خرید</a>
-                        <p>
-                            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم
-                            از صنعت چاپ و با استفاده از طراحان گرافیک است.
-                            چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است.
-                        </p>
-                    </div>
-                    <div class="card-footer bg-white border-top-0">
-                        <img src="assets/images/person.jpg" class="person-pic">
-                        <span class="writer">سارا رضایی</span>
-                        <div class="float-end mt-2">
-                            <span class="time"><i class="fa fa-clock font-13 me-1"></i>2 ساعت قبل</span>
-                        </div>
-                    </div>
-                </div>
-            </div><!-- end item -->
-
+                </div><!-- end item -->
+            {% endfor %}
         </div><!-- end suggestion blog posts -->
 
 

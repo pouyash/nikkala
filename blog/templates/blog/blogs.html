@@ -1,13 +1,14 @@
 {% extends 'blog/main.html' %}
+{% load poll_extras %}
 {% block title %}
     وبلاگ
 {% endblock %}
 {% block main %}
     <section class="blog-category-banner"><!-- start banner -->
         <div class="blog-category-banner-text">
-            <a href="blog-category.html" class="banner-text-inner">
-                <h2>معرفی بهترین گوشی های میان‌رده با دوربین قدرتمند</h2>
-                <p>(خرداد 1402)</p>
+            <a href="{% url 'blog_detail' slug=banner.blog.slug %}" class="banner-text-inner">
+                <h2>{{ banner.title }}</h2>
+                <p>({{ banner.created_at | jalali_date }})</p>
             </a>
         </div>
     </section>
@@ -15,95 +16,63 @@
 
         <div class="row">
 
-            <div class="col-lg-3">
 
-                <div class="custom-sidebar"><!-- start filter box 1 -->
-                    <p class="font-12 border-bottom pb-2">دسته بندی ها</p>
-                    <div class="mt-3 px-2">
-                        <div class="form-check mb-3">
-                            <input type="checkbox" class="form-check-input" id="category-1">
-                            <label class="form-check-label font-12" for="category-1">کالای الکترونیک</label>
-                        </div>
-                        <div class="form-check mb-3">
-                            <input type="checkbox" class="form-check-input" id="category-2">
-                            <label class="form-check-label font-12" for="category-2">اپلیکیشن و نرم افزار</label>
-                        </div>
-                        <div class="form-check mb-3">
-                            <input type="checkbox" class="form-check-input" id="category-3">
-                            <label class="form-check-label font-12" for="category-3">فناوری اطلاعات و ارتباطات</label>
-                        </div>
-                        <div class="form-check mb-3">
-                            <input type="checkbox" class="form-check-input" id="category-4">
-                            <label class="form-check-label font-12" for="category-4">هوش مصنوعی و رباتیک</label>
-                        </div>
-                        <div class="form-check mb-3">
-                            <input type="checkbox" class="form-check-input" id="category-5">
-                            <label class="form-check-label font-12" for="category-5">هوا فضا و نجوم</label>
-                        </div>
-                    </div>
-                </div><!-- end filter box 1 -->
-
-                <div class="custom-sidebar"><!-- start hashtag box -->
-                    <p class="font-12 border-bottom pb-2">هشتگ های داغ </p>
-                    <div class="mt-3 px-2 hashtag">
-                        <span>#گوشی هوشمند</span>
-                        <span>#گوشی موبایل</span>
-                    </div>
-                </div><!-- end hashtag box -->
-
-            </div>
-
-            <div class="col-lg-9">
+            <div class="col-lg-12">
 
                 <div class="row"><!-- start title -->
                     <div class="col-12 d-flex align-items-center">
-                        <h1 class="blog-title-text">منتخب علم و تکنولوژی</h1>
+                        <h1 class="blog-title-text">وبلاگ</h1>
                         <div class="blog-title-line"></div>
                         <a href="#" class="blog-title-btn">همه مقالات <i class="fa fa-arrow-left align-middle"></i></a>
                     </div>
                 </div><!-- end title -->
 
                 <div class="row mt-3"><!-- start blog posts -->
-                {% if blogs %}
-                {% for blog in blogs %}
-                    <div class="col-lg-4 col-sm-6 mb-3"><!-- start item -->
-                        <div class="card border-0 custom-blog-card">
-                            <div class="sub-layer">
-                                <img src="{{ blog.image.url }}" class="img-fluid">
-                                <div class="over-layer">
-                                    <a href="{% url 'blogs' cat=blog.category.slug %}" class="image-badge">{{ blog.category.title }}</a>
-                                    <span class="image-like">(4)<i class="far fa-heart ms-1"></i></span>
+                    {% if blogs %}
+                        {% for blog in blogs %}
+                            <div class="col-lg-4 col-sm-6 mb-3"><!-- start item -->
+                                <div class="card border-0 custom-blog-card">
+                                    <div class="sub-layer">
+                                        <img src="{{ blog.image.url }}" class="img-fluid">
+                                        <div class="over-layer">
+                                            <a href="{% url 'blogs' cat=blog.category.slug %}"
+                                               class="image-badge">{{ blog.category.title }}</a>
+                                            <span class="image-like">(4)<i class="far fa-heart ms-1"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="card-body pb-0">
+                                        <a href="{% url 'blog_detail' slug=blog.slug %}">{{ blog.title }}</a>
+                                        <p>
+                                            {{ blog.short_description | truncatewords:12 }}
+                                        </p>
+                                    </div>
+                                    <div class="card-footer bg-white border-top-0">
+                                        <img src="{{ blog.image.url }}" class="person-pic">
+                                        <span class="writer">{{ blog.user.get_full_name }}</span>
+                                        <div class="float-end mt-2">
+                                            <span class="time"><i
+                                                    class="fa fa-clock font-13 me-1"></i>{{ blog.created_at | jalali_date_time }}</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="card-body pb-0">
-                                <a href="{% url 'blog_detail' slug=blog.slug %}">{{ blog.title }}</a>
-                                <p>
-                                    {{ blog.short_description | truncatewords:12 }}
-                                </p>
-                            </div>
-                            <div class="card-footer bg-white border-top-0">
-                                <img src="{{ blog.image.url }}" class="person-pic">
-                                <span class="writer">{{ blog.user.get_full_name }}</span>
-                                <div class="float-end mt-2">
-                                    <span class="time"><i class="fa fa-clock font-13 me-1"></i>2 ساعت قبل</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
+                        {% endfor %}
 
 
-                    <ul class="custom-pagination mt-4"><!-- start pagination -->
-                        <li><a href="#"><i class="fa fa-angle-right align-middle"></i></a></li>
-                        <li class="active"><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#"><i class="fa fa-angle-left align-middle"></i></a></li>
-                    </ul><!-- end pagination -->
-                {% else %}
-                    <div class="alert alert-warning">با چنین دسته بندی مواردی یافت نشد</div>
-                {% endif %}
+                        <ul class="custom-pagination mt-4"><!-- start pagination -->
+                            {% if page_obj.has_previous %}
+                                <li><a href="?page={{ page_obj.previous_page_number }}"><i class="fa fa-angle-right align-middle"></i></a></li>
+                            {% endif %}
+                            {% for page in paginator %}
+                                <li class="{% if page.number == page_obj.number %}active{% endif %}"><a href="?page={{ page.number }}">{{ page.number }}</a></li>
+                            {% endfor %}
+                            {% if page_obj.has_next %}
+                                <li><a href="?page={{ page_obj.next_page_number }}"><i class="fa fa-angle-left align-middle"></i></a></li>
+                            {% endif %}
+                        </ul><!-- end pagination -->
+                    {% else %}
+                        <div class="alert alert-warning">با چنین دسته بندی مواردی یافت نشد</div>
+                    {% endif %}
                 </div><!-- end blog posts -->
 
             </div>
