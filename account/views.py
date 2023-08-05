@@ -9,6 +9,7 @@ from django.views.generic import ListView, DetailView
 from requests import post
 
 from order.models import Order, OrderDetail
+from product.models import Product
 from utils.functions import create_activation_code
 # Create your views here.
 from django.urls import reverse
@@ -204,3 +205,18 @@ class OrderDetailView(ListView):
         qs = super(OrderDetailView, self).get_queryset()
         qs = qs.filter(order__id=self.kwargs.get('pk'), order__user=self.request.user, order__is_paid=True)
         return qs
+
+
+
+@method_decorator(login_required, name='dispatch')
+class ListFavoriteView(ListView):
+    model = Product
+    template_name = 'account/profile/favorites.html'
+    context_object_name = 'products'
+    paginate_by = 1
+
+    def get_queryset(self):
+        qs = super(ListFavoriteView, self).get_queryset()
+        qs = qs.filter(user_like=self.request.user)
+        return qs
+

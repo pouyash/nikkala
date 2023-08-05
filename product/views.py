@@ -1,5 +1,7 @@
+from django.contrib.auth.decorators import login_required
 from django.db.models import Q, Count, Sum
-from django.shortcuts import render
+from django.http import HttpRequest
+from django.shortcuts import render, redirect
 
 # Create your views here.
 from django.views.generic import ListView, DetailView
@@ -46,7 +48,6 @@ class ProductsView(ListView):
         context = super(ProductsView, self).get_context_data()
         context['category_parent'] = Category.objects.filter(parent=None)
         context['brands'] = Brand.objects.all()
-
         return context
 
 class ProductDetailView(DetailView):
@@ -54,3 +55,31 @@ class ProductDetailView(DetailView):
     context_object_name = 'product'
     model = Product
     slug_field = 'slug'
+
+    def get_context_data(self, **kwargs):
+        context = super(ProductDetailView, self).get_context_data()
+        context['has_favorite'] = False
+        if self.request.user.is_authenticated:
+            slug = self.kwargs.get('slug')
+            product = Product.objects.get(slug=slug)
+            user = self.request.user
+            if product.user_like.filter(id=user.id):
+                context['has_favorite'] = True
+        return context
+
+@login_required
+def add_product_to_favorite(request:HttpRequest, id):
+    user = request.user
+    product_exists = Product.objects.filter(id=id).exists()
+    if product_exists:
+        product = Product.objects.filter(id=id).first()
+        check = product.user_like.filter(id=user.id).exists()
+        if check:
+            product.user_like.remove(user)
+            product.save()
+        else:
+            product.user_like.add(user)
+            product.save()
+        return redirect(request.META.get('HTTP_REFERER'))
+    else:
+        return redirect(request.META.get('HTTP_REFERER'))

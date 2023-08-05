@@ -5,10 +5,7 @@
             <div class="col-md-8">
                 <div class="blog-footer-menu">
                     <ul class="w-100 d-flex ps-0">
-                        <li><a href="index-2.html">نیک کالا</a></li>
-                        <li><a href="about-us.html">شرایط باز نشر</a></li>
-                        <li><a href="about-us.html">فرصت های همکاری</a></li>
-                        <li><a href="about-us.html">رفع مسئولیت</a></li>
+                        <li><a href="{% url 'home' %}">نیک کالا</a></li>
                     </ul>
                 </div>
                 <p> هر گونه کپی‌برداری از مطالب نیک کالا مگ بدون کسب مجوز مکتوب ممنوع است.
@@ -16,18 +13,12 @@
                 </p>
             </div>
             <div class="col-md-4">
-                <div class="input-group email-box">
-                    <input type="email" class="form-control form-control-lg"
-                           placeholder=" برای عضویت در خبرنامه ایمیل خود را وارد کنید">
-                    <button type="submit" class="btn btn-danger font-13 px-3">ارسال</button>
-                </div>
                 <div class="row">
                     <div class="col-12">
                         <div class="social-list text-end mt-4">
-                            <a href="#"><i class="fab fa-instagram social-media"></i></a>
-                            <a href="#"><i class="fab fa-telegram social-media"></i></a>
-                            <a href="#"><i class="fab fa-linkedin social-media"></i></a>
-                            <a href="#"><i class="fab fa-twitter social-media"></i></a>
+                            {% for sm in social_medias %}
+                                <a href="{{ sm.link }}"><i class="fab fa-{{ sm.title }} social-media"></i></a>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>

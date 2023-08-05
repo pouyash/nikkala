@@ -1,6 +1,7 @@
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.db import models
-
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from user.models import User
 
 
@@ -66,6 +67,9 @@ class CommentBlog(models.Model):
     blog = models.ForeignKey(Blog, related_name='comment_blog', on_delete=models.CASCADE, verbose_name='مقاله')
     is_active = models.BooleanField(default=True, verbose_name='فعال / غیرفعال')
 
+    user_reaction = models.ManyToManyField(User, related_name='blog_comment_like', verbose_name='کاربر', blank=True)
+    like_count = models.IntegerField(default=0, verbose_name='تعداد لایک ها')
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -75,3 +79,6 @@ class CommentBlog(models.Model):
     class Meta:
         verbose_name = "نظر"
         verbose_name_plural = "نظرات"
+
+
+

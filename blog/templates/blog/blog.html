@@ -15,11 +15,16 @@
                     <div class="blog-content-title">
                         <div class="d-flex align-items-center justify-content-between">
                             <h1>{{ blog.title }}</h1>
-                            <i class="far fa-heart font-20 text-muted"></i>
+                            {% if has_favorite %}
+                                <a href="{% url 'blog_add_to_favorite' id=blog.id %}"><i class="fas fa-heart font-20 text-muted"></i></a>
+                            {% else %}
+                                 <a href="{% url 'blog_add_to_favorite' id=blog.id %}"><i class="far fa-heart font-20 text-muted"></i></a>
+                            {% endif %}
                         </div>
                         <span class="content-writer">{{ blog.category.title }}</span>
-                        <span class="d-inline-block font-13 text-muted"><i
-                                class="far fa-clock"></i> {{ blog.created_at | jalali_date_time }}</span>
+                        <span class="d-inline-block font-13 text-muted">
+                            <i class="far fa-clock"></i> {{ blog.created_at | jalali_date_time }}
+                        </span>
                     </div>
 
                     <img src="{{ blog.image.url }}" class="blog-detail-pic">
@@ -61,29 +66,31 @@
                     </div><!-- end comment form -->
 
                     <div class="row mx-1 mt-5"><!-- start comment box -->
-                    {% for comment in comments %}
-                        <div class="col-12 question-box">
-                            <div class="question-header">
-                                <div>
-                                    <img src="{% static 'assets/images/user.jpg' %}" class="user-comment-pic">
-                                    <span>{{ comment.name }}</span>
+                        {% for comment in comments %}
+                            <div class="col-12 question-box">
+                                <div class="question-header">
+                                    <div>
+                                        <img src="{% static 'assets/images/user.jpg' %}" class="user-comment-pic">
+                                        <span>{{ comment.name }}</span>
+                                    </div>
+                                    <p class="font-12 text-secondary">{{ comment.created_at | jalali_date }}</p>
                                 </div>
-                                <p class="font-12 text-secondary">{{ comment.created_at | jalali_date }}</p>
-                            </div>
-                            <div class="question-body py-3">
-                               <p>{{ comment.comment }}</p>
-                            </div>
-                            <div class="question-footer">
-                                <span class="font-12 ms-3"><i
-                                        class="far fa-heart text-danger font-114 me-1"></i>(12)</span>
-                                <span class="font-12 ms-3"><i class="far fa-thumbs-up text-success font-14 me-1"></i>(8)</span>
-                                <span class="font-12 ms-3"><i class="far fa-thumbs-down text-muted font-14 me-1"></i>(0)</span>
-                            </div>
-                            {% for answer in comment.comment_blog_parent.all %}
-                                <div class="alert alert-warning">{{ answer.comment }}</div>
+                                <div class="question-body py-3">
+                                    <p>{{ comment.comment }}</p>
+                                </div>
+                                <div class="question-footer">
+                                    <a href="{% url 'blog_comment_like' comment_id=comment.id %}">
+                                    <span class="font-12 ms-3"><i
+                                            class="{% if request.user in comment.user_reaction.all %} fas {% else %} far {% endif %} fa-thumbs-up text-success font-14 me-1"></i>
+                                        ({{ comment.like_count }})
+                                    </span>
+                                    </a>
+                                </div>
+                                {% for answer in comment.comment_blog_parent.all %}
+                                    <div class="alert alert-warning">{{ answer.comment }}</div>
                                 {% endfor %}
-                        </div>
-                    {% endfor %}
+                            </div>
+                        {% endfor %}
                     </div><!-- end comment box -->
 
                 </div>

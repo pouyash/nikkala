@@ -18,3 +18,7 @@ def jalali_time(val):
 @register.filter
 def jalali_date_time(val):
     return datetime2jalali(val).strftime("%Y/%m/%d | %H:%M")
+
+@register.filter
+def has_favorite(product, user):
+    return product.user_like.filter(id=user.id).exists()

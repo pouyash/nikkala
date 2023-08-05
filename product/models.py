@@ -7,6 +7,7 @@ from django.utils.text import slugify
 from filebrowser.fields import FileBrowseField
 
 # file = FileBrowseField("File", max_length=200)
+from user.models import User
 
 
 class Category(models.Model):
@@ -62,7 +63,7 @@ class Product(models.Model):
     short_description = models.TextField(null=True, blank=True, verbose_name='توضحیات مختصر')
     description = RichTextUploadingField(null=True, blank=True, verbose_name='توضیحات')
     number = models.PositiveIntegerField(verbose_name='تعداد')
-
+    user_like = models.ManyToManyField(User, related_name='likes', verbose_name='لایک', blank=True)
     guarantee = models.CharField(max_length=100, verbose_name='گارانتی')
     is_active = models.BooleanField(default=True, verbose_name='فعال/غیرفعال')
 

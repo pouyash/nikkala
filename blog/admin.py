@@ -36,4 +36,10 @@ class BlogAdmin(admin.ModelAdmin):
 
 @register(CommentBlog)
 class CommentBlogAdmin(admin.ModelAdmin):
-    list_display = ['id', 'name', 'email', 'parent', 'is_active']
+    list_display = ['id', 'name', 'email', 'parent', 'is_active', 'like_count']
+
+
+
+
+
+

@@ -14,5 +14,6 @@ urlpatterns = [
     path('change_password/', views.ChangePasswordPost.as_view(), name='change_password_post'),
     path('orders/', views.ListOrderView.as_view(), name='user_orders'),
     path('orders_detail/<pk>', views.OrderDetailView.as_view(), name='user_order_detail'),
+    path('product_favorites/', views.ListFavoriteView.as_view(), name='product_favorites_in_account'),
 
 ]

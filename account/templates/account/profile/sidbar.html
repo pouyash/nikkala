@@ -11,7 +11,13 @@
                 همه سفارش ها</a>
         </li>
         <li><a href="profile-order-return.html"><i class="fa  fa-retweet align-middle me-2"></i>درخواست مرجوعی</a></li>
-        <li><a href="profile-fav-list.html"><i class="far fa-heart align-middle me-2"></i>لیست علاقمندی ها</a></li>
+        <li>
+            <a {% if request.resolver_match.view_name == 'product_favorites_in_account' %} class="text-info" {% endif %}
+                    href="{% url 'product_favorites_in_account' %}">
+            <i class="far fa-heart align-middle me-2"></i>
+                لیست علاقمندی ها
+            </a>
+        </li>
         <li><a href="profile-comment.html"><i class="far fa-comment align-middle me-2"></i>نظرات</a></li>
         <li><a href="profile-address.html"><i class="fas fa-map-marker-alt align-middle me-2"></i>آدرس ها</a></li>
         <li><a href="profile-info.html"><i class="far fa-address-card align-middle me-2"></i>اطلاعات حساب</a></li>

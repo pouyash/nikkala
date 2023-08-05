@@ -101,8 +101,11 @@
                             <div class="col-12"><!-- start sort nav -->
                                 <ul class="nav nav-pills sort-by">
                                     <span class="font-13 mt-2 me-2"> مرتب سازی بر اساس :</span>
-                                    <li class="nav-item"><a href="{% url 'products_order' order='most_buy' %}" class="nav-link font-13 text-dark
-{% if request.path == '/product/order/most_buy/' %} active {% endif %}">پر فروش ترین</a>
+                                    <li class="nav-item">
+                                        <a href="{% url 'products_order' order='most_buy' %}" class="nav-link font-13 text-dark
+                                        {% if request.path == '/product/order/most_buy/' %} active {% endif %}">
+                                            پر فروش ترین
+                                        </a>
                                     </li>
                                     <li class="nav-item"><a href="{% url 'products_order' order='newest' %}"
                                                             class="nav-link font-13 text-dark {% if request.path == '/product/order/newest/' %} active {% endif %}">
@@ -136,8 +139,21 @@
                                         </a>
                                             <div class="d-flex justify-content-between">
                                                 <div class="mt-3 ps-4">
-                                                    <span class="heart"><i
-                                                            class="far fa-heart font-14 text-muted me-2"></i></span>
+                                                    {% if request.user.is_authenticated %}
+                                                        <span class="heart">
+                                                        {% if product|has_favorite:request.user %}
+                                                            <a href="{% url 'product_add_to_favorite' id=product.id %}">
+                                                            <i class="fas fa-heart font-14 text-muted me-2"></i>
+                                                            </a>
+
+                                                        {% else %}
+                                                            <a href="{% url 'product_add_to_favorite' id=product.id %}">
+                                                            <i class="far fa-heart font-14 text-muted me-2"></i>
+                                                            </a>
+                                                        {% endif %}
+                                                        </span>
+                                                    {% endif %}
+
                                                     <span class="random"><i
                                                             class="fa fa-random font-14 text-muted me-2"></i></span>
                                                     <span class="add-to-cart"><i
