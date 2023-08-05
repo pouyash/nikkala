@@ -14,8 +14,15 @@ class ProductsView(ListView):
     model = Product
     paginate_by = 1
     context_object_name = 'products'
+
     def get_queryset(self):
+
         qs = super(ProductsView, self).get_queryset()
+        product_search = self.request.GET.get('product_search')
+        if product_search:
+            qs = qs.filter(Q(title__icontains=product_search) | Q(category__title__icontains=product_search) | Q(brand__title__icontains=product_search))
+            return qs
+
         if self.request.path == '/product/order/most_buy/':
             order = self.kwargs.get('order')
             if order == 'most_buy':

@@ -47,7 +47,7 @@
                             <span class="writer">{{ blog.user.get_full_name }}</span>
                             <div class="float-end mt-2">
                                 <span class="time"><i
-                                        class="fa fa-clock font-13 me-1"></i>{{ blog.created_at | jalali_date_time }}</span>
+                                        class="fa fa-clock font-13 me-1"></i>{{ blog.created_at | get_date }}</span>
                             </div>
                         </div>
                     </div>
@@ -77,16 +77,16 @@
                             </div>
                         </div>
                         <div class="card-body pb-0">
-                           <a href="{% url 'blog_detail' slug=tech.slug %}" class="image-badge">{{ tech.title }}</a>
+                           <a href="{% url 'blog_detail' slug=tech.slug %}" class="image-badge">{{ tech.title | truncatewords:12 }}</a>
                             <p>
-                                {{ tech.short_description | truncatewords:18 }}
+                                {{ tech.short_description | truncatewords:18 | safe}}
                             </p>
                         </div>
                         <div class="card-footer bg-white border-top-0">
                             <img src="{% static 'assets/images/person.jpg' %}" class="person-pic">
                             <span class="writer">{{ tech.user }}</span>
                             <div class="float-end mt-2">
-                                <span class="time"><i class="fa fa-clock font-13 me-1"></i>{{ tech.created_at | jalali_date_time }}</span>
+                                <span class="time"><i class="fa fa-clock font-13 me-1"></i>{{ tech.created_at | get_date }}</span>
                             </div>
                         </div>
                     </div>
