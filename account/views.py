@@ -12,7 +12,7 @@ from slugify import slugify
 from unidecode import unidecode
 
 
-from account.permissions import CanEditAndDeletePermission
+from account.permissions import CanEditAndDeletePermission, CanCreatePermission
 from blog.models import Blog
 from order.models import Order, OrderDetail
 from product.models import Product
@@ -228,7 +228,7 @@ class ListFavoriteView(ListView):
 
 
 @method_decorator(login_required, name='dispatch')
-class BlogsAccountView(ListView):
+class BlogsAccountView(CanCreatePermission, ListView):
     model = Blog
     template_name = 'account/profile/blogs.html'
     context_object_name = 'blogs'
@@ -237,7 +237,7 @@ class BlogsAccountView(ListView):
 
 
 @method_decorator(login_required, name='dispatch')
-class BlogCreateAccountView(CreateView):
+class BlogCreateAccountView(CanCreatePermission, CreateView):
     model = Blog
     form_class = BlogsForm
     template_name = 'account/profile/create_blog.html'
@@ -249,7 +249,6 @@ class BlogCreateAccountView(CreateView):
 
     def form_valid(self, form):
         form.instance.user = self.request.user
-
         title = form.instance.title
         reshaped_title = unidecode(title)
         slug = slugify(reshaped_title)
