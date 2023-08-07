@@ -1,25 +1,29 @@
 <div class="profile-card"><!-- start sidebar menu -->
 
     <ul class="profile-sidebar">
-        <li><a href="{% url 'profile' %}" {% if request.path == '/accounts/profile/' %} class="text-info" {% endif %}><i class="far fa-user-circle align-middle me-2"></i>پروفایل</a>
+        <li><a href="{% url 'profile' %}" {% if request.path == '/accounts/profile/' %} class="text-info" {% endif %}><i
+                class="far fa-user-circle align-middle me-2"></i>پروفایل</a>
         </li>
         <li>
             <a href="{% url 'user_orders' %}"
-                    {% if request.path == '/accounts/orders/' or request.resolver_match.view_name == 'user_order_detail' %} class="text-info" {% endif %}
+                    {% if request.path == '/accounts/orders/' or request.resolver_match.view_name == 'user_order_detail' %}
+               class="text-info" {% endif %}
             >
                 <i class="fas fa-shopping-cart align-middle me-2"></i>
                 همه سفارش ها</a>
         </li>
-        <li><a href="profile-order-return.html"><i class="fa  fa-retweet align-middle me-2"></i>درخواست مرجوعی</a></li>
+        {% if request.user.is_admin %}
+            <li><a href="{% url 'blogs_in_account' %}" {% if request.resolver_math.view_name == 'blogs_in_account' %}
+                   class="text-info" {% endif %}>
+                <i class="fa  fa-retweet align-middle me-2"></i>لیست وبلاگ</a>
+            </li>
+        {% endif %}
         <li>
             <a {% if request.resolver_match.view_name == 'product_favorites_in_account' %} class="text-info" {% endif %}
-                    href="{% url 'product_favorites_in_account' %}">
-            <i class="far fa-heart align-middle me-2"></i>
+                                                                                           href="{% url 'product_favorites_in_account' %}">
+                <i class="far fa-heart align-middle me-2"></i>
                 لیست علاقمندی ها
             </a>
         </li>
-        <li><a href="profile-comment.html"><i class="far fa-comment align-middle me-2"></i>نظرات</a></li>
-        <li><a href="profile-address.html"><i class="fas fa-map-marker-alt align-middle me-2"></i>آدرس ها</a></li>
-        <li><a href="profile-info.html"><i class="far fa-address-card align-middle me-2"></i>اطلاعات حساب</a></li>
     </ul>
 </div><!-- end sidebar menu -->

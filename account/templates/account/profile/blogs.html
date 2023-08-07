@@ -1,0 +1,77 @@
+{% extends 'account/profile/index.html' %}
+{% load poll_extras %}
+{% block title %}
+    حساب کاربری - وبلاگ
+{% endblock %}
+
+{% block content %}
+    <div class="profile-card">
+    <a style="margin-bottom: 10px;" class="btn btn-success" href="{% url 'blogs_create_in_account' %}">ایجاد وبلاگ +</a>
+        <div class="row">
+            {% if blogs %}
+                <table class="table table-striped table-dark">
+                    <thead>
+                    <tr>
+                        <th scope="col">شناسه</th>
+                        <th scope="col">عنوان</th>
+                        <th scope="col">توضیحات مختصر</th>
+                        <th scope="col">تصویر</th>
+                        <th scope="col">فعال / غیرفعال</th>
+                        <th scope="col">عملیات</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    {% for blog in blogs %}
+                        <tr>
+                            <th scope="row">{{ blog.id }}</th>
+                            <td>{{ blog.title }}</td>
+                            <td>{{ blog.short_description | truncatewords:14 }}</td>
+                            <td><img width="100" src="{{ blog.image.url }}" alt=""></td>
+                            <td>
+                                {% if blog.is_active %}
+                                    <i class="fa fa-check"></i>
+                                {% else %}
+                                    <i class="fa fa-times"></i>
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if request.user.id == blog.user.id %}
+                                    <a href="{% url 'blogs_edit_in_account' pk=blog.pk %}" class="btn btn-info">
+                                        ویرایش
+                                    </a>
+                                    <a href="{% url 'blogs_delete_in_account' pk=blog.pk %}" class="btn btn-danger">
+                                        حذف
+                                    </a>
+                                {% else %}
+                                    <div class="alert alert-warning">شما قادر به ویرایش این پست نمیباشید</div>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+            {% else %}
+                <div class="alert alert-warning">هیچگونه وبلاگی وجود ندارد</div>
+            {% endif %}
+        </div>
+    </div>
+    <div>
+        <ul class="custom-pagination mt-4"><!-- start pagination -->
+            {% if page_obj.has_previous %}
+                <li><a href="?page={{ page_obj.previous_page_number }}"><i
+                        class="fa fa-angle-right align-middle"></i></a></li>
+            {% endif %}
+            {% for page in paginator %}
+                <li class="{% if page.number == page_obj.number %}active{% endif %}"><a
+                        href="?page={{ page.number }}">{{ page.number }}</a></li>
+            {% endfor %}
+            {% if page_obj.has_next %}
+                <li><a href="?page={{ page_obj.next_page_number }}"><i class="fa fa-angle-left align-middle"></i></a>
+                </li>
+            {% endif %}
+        </ul><!-- end pagination -->
+    </div>
+{% endblock %}

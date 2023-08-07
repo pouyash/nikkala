@@ -15,5 +15,9 @@ urlpatterns = [
     path('orders/', views.ListOrderView.as_view(), name='user_orders'),
     path('orders_detail/<pk>', views.OrderDetailView.as_view(), name='user_order_detail'),
     path('product_favorites/', views.ListFavoriteView.as_view(), name='product_favorites_in_account'),
+    path('blogs/', views.BlogsAccountView.as_view(), name='blogs_in_account'),
+    path('blog_create/', views.BlogCreateAccountView.as_view(), name='blogs_create_in_account'),
+    path('blog_edit/<pk>/', views.BlogEditAccountView.as_view(), name='blogs_edit_in_account'),
+    path('blog_delete/<pk>/', views.BlogDeleteAccountView.as_view(), name='blogs_delete_in_account'),
 
 ]

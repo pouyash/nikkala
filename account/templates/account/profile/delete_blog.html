@@ -1,0 +1,28 @@
+{% extends 'account/profile/index.html' %}
+{% load static %}
+{% block title %}
+    حساب کاربری - ایجاد وبلاگ
+{% endblock %}
+
+{% block content %}
+    <div class="profile-card">
+        <div class="row">
+
+
+            <form action="" method="post">
+                {% csrf_token %}
+                <div>آیا مطمئن هستید میخواهید این پست را حذف کنید: </div>
+                <div>
+                    عنوان :
+                    {{ blog.title }}
+                </div>
+                <button type="submit" class="btn btn-danger d-block font-12 mx-auto mb-4 remember-btn">
+                    حذف
+                </button>
+            </form>
+
+        </div>
+    </div>
+
+
+{% endblock %}

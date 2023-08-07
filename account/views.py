@@ -5,17 +5,23 @@ from django.http import HttpResponse, HttpRequest
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.decorators import method_decorator
 from django.views.decorators.http import require_http_methods, require_GET, require_POST
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic.edit import ModelFormMixin
 from requests import post
+from slugify import slugify
+from unidecode import unidecode
 
+
+from account.permissions import CanEditAndDeletePermission
+from blog.models import Blog
 from order.models import Order, OrderDetail
 from product.models import Product
 from utils.functions import create_activation_code
 # Create your views here.
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.views import View
 
-from account.forms import RegisterForm, LoginForm, ChangePasswordForm
+from account.forms import RegisterForm, LoginForm, ChangePasswordForm, BlogsForm
 from user.models import User
 from utils.email import send_email
 
@@ -220,3 +226,64 @@ class ListFavoriteView(ListView):
         qs = qs.filter(user_like=self.request.user)
         return qs
 
+
+@method_decorator(login_required, name='dispatch')
+class BlogsAccountView(ListView):
+    model = Blog
+    template_name = 'account/profile/blogs.html'
+    context_object_name = 'blogs'
+    paginate_by = 2
+    ordering = '-id'
+
+
+@method_decorator(login_required, name='dispatch')
+class BlogCreateAccountView(CreateView):
+    model = Blog
+    form_class = BlogsForm
+    template_name = 'account/profile/create_blog.html'
+    context_object_name = 'form'
+
+
+    def get_success_url(self):
+        return reverse_lazy('blogs_in_account')
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+
+        title = form.instance.title
+        reshaped_title = unidecode(title)
+        slug = slugify(reshaped_title)
+        form.instance.slug = slug
+        return super(BlogCreateAccountView, self).form_valid(form)
+
+
+@method_decorator(login_required, name='dispatch')
+class BlogEditAccountView(CanEditAndDeletePermission, UpdateView):
+    model = Blog
+    form_class = BlogsForm
+    template_name = 'account/profile/edit_blog.html'
+    context_object_name = 'form'
+    query_pk_and_slug = "pk"
+
+    def get_success_url(self):
+        return reverse_lazy('blogs_in_account')
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+
+        title = form.instance.title
+        reshaped_title = unidecode(title)
+        slug = slugify(reshaped_title)
+        form.instance.slug = slug
+        return super(BlogEditAccountView, self).form_valid(form)
+
+
+@method_decorator(login_required, name='dispatch')
+class BlogDeleteAccountView(CanEditAndDeletePermission, DeleteView):
+    model = Blog
+    query_pk_and_slug = "pk"
+    template_name = 'account/profile/delete_blog.html'
+    context_object_name = 'blog'
+
+    def get_success_url(self):
+        return reverse_lazy('blogs_in_account')

@@ -1,0 +1,58 @@
+{% extends 'account/profile/index.html' %}
+{% load static %}
+{% block title %}
+    حساب کاربری - ویرایش وبلاگ
+{% endblock %}
+
+{% block content %}
+    <div class="profile-card">
+        <div class="row">
+
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="mb-3 mt-3">
+                    {{ form.title.label }}
+                    {{ form.title }}
+
+                </div>
+                <div class="mb-3 mt-3">
+                    {{ form.image.label }}
+                    {{ form.image }}
+
+                </div>
+                <div class="mb-3 mt-3">
+                    {{ form.is_active.label }}
+                    {{ form.is_active }}
+
+                </div>
+                <div class="mb-3 mt-3">
+                    {{ form.category.label }}
+                    {{ form.category }}
+
+                </div>
+                <div class="mb-3 mt-3">
+                    {{ form.tags.label }}
+                    {{ form.tags }}
+
+                </div>
+                <div class="mb-3 mt-3">
+                    {{ form.short_description.label }}
+                    {{ form.short_description }}
+
+                </div>
+                <div class="mb-3 mt-3">
+                    {{ form.description.label }}
+                    {{ form.description }}
+
+                </div>
+
+                <button type="submit" class="btn btn-danger d-block font-12 mx-auto mb-4 remember-btn">
+                    ویرایش
+                </button>
+            </form>
+
+        </div>
+    </div>
+    <script>window.CKEDITOR_BASEPATH = '/my_static/ckeditor/ckeditor/';</script>
+
+{% endblock %}
